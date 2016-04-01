@@ -5,3 +5,16 @@
 #nav {
 	z-index: 3;
 }
+
+.test {
+	background-image:url(images/post-it.jpg);
+	background-size:cover;
+}
+
+.test2 {
+	background-color: #d6d6c2;
+	color:#ffffff;
+	height:200px;
+	background-image:url(images/board2.jpg);
+	background-size:cover;
+}
