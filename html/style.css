@@ -18,3 +18,21 @@
 	background-image:url(images/board2.jpg);
 	background-size:cover;
 }
+
+.fixedbutton {
+    position: fixed;
+    bottom: 90%;
+    right: 80%;
+	z-index: 1;
+}
+
+.login {
+	margin-top: 50%;
+	
+}
+
+.eingaben {
+	font-family: Arial Black;
+	font-weight: bold;
+}
+

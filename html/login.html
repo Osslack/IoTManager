@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>Bootstrap Example</title>
+ <title>Login Iot Manager</title>
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="style.css">
+ <script type="text/javascript">
+		function onLogin(){
+			open('main.html');
+		}
+	</script>
+ 
 </head>
-<body>
+<body class="background-login">
 
-<div class="container-fluid">
- <h1>Hello World!</h1>
- <p>Resize the browser window to see the effect.</p>
- <div class="row">
-   <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
-   <div class="col-sm-4" style="background-color:lavenderblush;">.col-sm-4</div>
-   <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
+<div>
+ 
+ <div class="row image">
+   <div class="col-sm-4"></div>
+   <div class="col-sm-4 " >
+	<div class="panel panel-primary login">
+	<div class="panel-heading"><h3>Login</h3></div>
+	<div class="panel-body">
+    <p class="eingaben">Username:</p><input type="text" value="Benutzername" >
+	<p class="eingaben">Passwort:</p><input type="password" value="Passwort" >
+  </div>
+  <div class="panel-footer"><center><button class="btn btn-default" type="button" id="login" onclick="onLogin()">Login</button></center></div>
+	</div>
+   </div>
+   <div class="col-sm-4" ></div>
  </div>
 </div>
 
@@ -25,5 +40,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    
    <script src="js/bootstrap.min.js"></script>
+   
+   
  </body>
 </html>
