@@ -21,8 +21,7 @@
 
 .fixedbutton {
     position: fixed;
-    bottom: 90%;
-    right: 80%;
+    bottom: 3%;
 	z-index: 1;
 }
 
