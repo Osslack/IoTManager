@@ -27,12 +27,27 @@
 }
 
 .login {
-	margin-top: 50%;
+	margin-top: 10%;
+}
+
+.login-btn {
+	
+}
+
+.account-btn {
 	
 }
 
 .eingaben {
 	font-family: Arial Black;
 	font-weight: bold;
+}
+
+.background-login {
+	background-color: #91A8D0;
+}
+
+.register {
+	text-align: right;
 }
 

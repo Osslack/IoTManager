@@ -1,46 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>Login Iot Manager</title>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="style.css">
- <script type="text/javascript">
+	
+
+  <title>Iot Manager</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
 		function onLogin(){
+			var user = document.getElementById('user').value;
+			var pw = document.getElementById('pw').value;
+			alert('Dein Username ist "' + user + '" und dein Passwort lautet: "' + pw+'"');
 			open('main.html');
 		}
+		
+		function onAccount(){
+			alert('Neuer Account Anlegen');
+		}
 	</script>
- 
-</head>
-<body class="background-login">
+  <link rel="stylesheet" href="style.css">
+<style>
+  /* Note: Try to remove the following lines to see the effect of CSS positioning */
+  .affix {
+      top: 0;
+      width: 100%;
+  }
 
-<div>
- 
- <div class="row image">
-   <div class="col-sm-4"></div>
-   <div class="col-sm-4 " >
-	<div class="panel panel-primary login">
-	<div class="panel-heading"><h3>Login</h3></div>
-	<div class="panel-body">
-    <p class="eingaben">Username:</p><input type="text" value="Benutzername" >
-	<p class="eingaben">Passwort:</p><input type="password" value="Passwort" >
+  .affix + .container-fluid {
+      padding-top: 70px;
+  }
+  </style>
+  
+  
+</head>
+<body>
+<div class="container-fluid test2" >
+	  <h1>IoT Manager</h1>
+	  <h3>... schaltet alles ein und/ oder aus!</h3>
+	  
+	 </div>
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" id="nav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    <div class="collapse navbar-collapse" id="myNavbar">
+    
+    </div>
   </div>
-  <div class="panel-footer"><center><button class="btn btn-default" type="button" id="login" onclick="onLogin()">Login</button></center></div>
+</nav>
+  
+<div class="container wrapper " >
+  <div class="row">
+	<div class="col-sm-4"></div>
+   <div class="col-sm-4 " >
+   <form id="form">
+	<div class="panel panel-primary login">
+	<div class="panel-heading">
+				<h1>Login</h1>
+	</div>
+	<div class="panel-body">
+    <p class="eingaben">Username:</p><input type="text" id="user" value="Benutzername" >
+	<p class="eingaben">Passwort:</p><input type="password" id="pw" value="Passwort" >
+  </div>
+  <div class="panel-footer">
+ 
+	<button class="btn btn-primary" type="button" id="login" onclick="onLogin()">Login</button>
+ 
+	<button class="btn btn-info pull-right" type="button" id="account" onclick="onAccount()">Neuer Account</button>
+  </form>
+  </div>
+  
 	</div>
    </div>
    <div class="col-sm-4" ></div>
  </div>
+  </div>
+
 </div>
 
 
-   
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   
-   <script src="js/bootstrap.min.js"></script>
-   
-   
- </body>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script src="js/bootstrap.min.js"></script>
+	
+  </body>
+
 </html>
