@@ -50,3 +50,13 @@
 	text-align: right;
 }
 
+  .modal-header, h4, .close {
+      background-color: #373A3C;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+
