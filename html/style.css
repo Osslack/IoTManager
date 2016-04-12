@@ -1,7 +1,3 @@
-.wrapper {
-	padding-top: 70px;
-}
-
 #nav {
 	z-index: 3;
 }
@@ -14,9 +10,9 @@
 .test2 {
 	background-color: #d6d6c2;
 	color:#ffffff;
-	height:200px;
+	height:150px;
 	background-image:url(images/board2.jpg);
-	background-size:cover;
+	background-size:100%;
 }
 
 .fixedbutton {
@@ -25,17 +21,9 @@
 	z-index: 1;
 }
 
-.login {
-	margin-top: 10%;
-}
 
-.login-btn {
-	
-}
 
-.account-btn {
-	
-}
+
 
 .eingaben {
 	font-family: Arial Black;
@@ -50,13 +38,19 @@
 	text-align: right;
 }
 
-  .modal-header, h4, .close {
+.modal-header, h4, .close {
       background-color: #373A3C;
       color:white !important;
       text-align: center;
       font-size: 30px;
   }
-  .modal-footer {
+.modal-footer {
       background-color: #f9f9f9;
   }
 
+.scrollen{
+    position: fixed; 
+    overflow: hidden;
+    width: 100%;
+
+}
