@@ -5,51 +5,57 @@
     <% include ../partials/head %>
 	<script type="text/javascript">
 	
-		$(document).ready(function(){    
-        $("#myModal").modal("show");    
+		$(document).ready(function(){  
+			document.getElementById('myNavbar').style.visibility='hidden';
+			document.getElementById('menubutton').style.display='none';
+        $("#loginModal").modal("show");    
 		});
+		
+		function onSwitchReg() {
+			$("#loginModal").modal("hide");
+			$("#regModal").modal("show");
+		};
+		
+		function onBackLogin(){
+			$("#regModal").modal("hide");
+			$("#loginModal").modal("show");
+		};
+		
+		function validateLogin() {
+			var user = document.getElementById('username').value;
+			var pw = document.getElementById('psw').value;
+			if(user === 'admin' ){
+				window.location = "main.html";
+			}
+		}
+		
+		
+		
+		
 		
 			
 		
 	</script>
 </head>
 <body >
-
-<header>
-				<% include ../partials/header %>
-				
-			</header>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-1"></div>
-		<div class="col-sm-10">
-			<% include ../partials/login %>
-			<% include ../partials/register %>
-			
+	<header>
+		<% include ../partials/header %>
+	</header>
 	
-    
-			
-
-			
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<% include ../partials/login %>
+				<% include ../partials/register %>
+			</div>
+			<div class="col-sm-1"></div>
 		</div>
-		</div>
-		<div class="col-sm-1"></div>
 	</div>
-</div>
-			<footer class="footer">
-				<% include ../partials/footer %>
-			</footer>
-			
-		
-			
-
-		</div>
-		<div class="col-sm-4"></div>
-	</div>	
-</div>
-		
+	
+	
 		
 		
     
 </body>
-</html>
+</html>	

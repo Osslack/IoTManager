@@ -2,11 +2,6 @@
 	z-index: 3;
 }
 
-.test {
-	background-image:url(images/post-it.jpg);
-	background-size:cover;
-}
-
 .test2 {
 	
 	color:#ffffff;
@@ -22,13 +17,6 @@
 }
 
 
-
-
-
-.eingaben {
-	font-family: Arial Black;
-	font-weight: bold;
-}
 
 .background-login {
 	background-color: #91A8D0;
@@ -73,4 +61,8 @@
 	with:100%;
 	height 80px;
 	text-algin: center;
+}
+
+.stylemodal {
+	padding:50px;
 }

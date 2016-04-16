@@ -24,9 +24,6 @@ app.get('/wflow', function(req, res) {
     res.render('pages/wflow');
 });
 
-function sayHello(){
-		$("#myModal").modal("show");
-	}
 
 app.use(express.static(__dirname + '/public'));
 app.listen(8088);
