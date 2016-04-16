@@ -5,7 +5,7 @@
     <% include ../partials/head %>
 	<script type="text/javascript">
 		function onCreateWflow(){
-		$("#myModal").modal("show");
+		$("#createWorkflow").modal("show");
 	}
 		
 	</script>
@@ -24,24 +24,19 @@
     
 			<main>
 				<div class="col-sm-4">
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>  
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div> 
-				</div>
-				<div class="col-sm-4">
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>
+					<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Gerätename</h3>
+						</div>
+						<div class="panel-body">
+							<p>IP-Adresse: 191.188.100.255</p>
+							<P>Port: 8000</p>
+							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
+						</div>
+						
+						 
+						</div>
 					<div class="jumbotron">
 						<h1>This is great</h1>
 						<p>Welcome to templating using EJS</p>
@@ -60,6 +55,50 @@
 						<h1>This is great</h1>
 						<p>Welcome to templating using EJS</p>
 					</div>
+					<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Gerätename</h3>
+						</div>
+						<div class="panel-body">
+							<p>IP-Adresse: 191.188.100.255</p>
+							<P>Port: 8000</p>
+							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
+						</div>
+						
+						 
+						</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="jumbotron">
+						<h1>This is great</h1>
+						<p>Welcome to templating using EJS</p>
+					</div>
+					<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Gerätename</h3>
+						</div>
+						<div class="panel-body">
+							<p>IP-Adresse: 191.188.100.255</p>
+							<P>Port: 8000</p>
+							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
+						</div>
+						
+						 
+						</div><div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Gerätename</h3>
+						</div>
+						<div class="panel-body">
+							<p>IP-Adresse: 191.188.100.255</p>
+							<P>Port: 8000</p>
+							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
+						</div>
+						
+						 
+						</div>
 					
 				</div>		
 			
@@ -69,7 +108,7 @@
 			<button type="button" class="fixedbutton btn btn-primary" onclick="onCreateWflow()">
 					<span class="glyphicon glyphicon-plus" ></span>
 				</button>
-				<% include ../partials/create %>
+				<% include ../partials/createWF %>
 
 			
 		</div>
