@@ -22,12 +22,19 @@
 			$("#loginModal").modal("show");
 		};
 		
-		function validateLogin() {
-			var user = document.getElementById('username').value;
-			var pw = document.getElementById('psw').value;
-			if(user === 'admin' ){
-				window.location = "main.html";
-			}
+		function onLogin() {
+			var username = $('#loginModal input#user').val();
+			var password = $('#loginModal input#password').val();
+			
+			alert(username + password);
+			onClear();
+		}
+		
+		function onClear(){
+			$('#loginModal input#user').val('');
+			$('#loginModal input#password').val('');
+			$('#loginModal input#password').first().focus();
+			
 		}
 		
 		
