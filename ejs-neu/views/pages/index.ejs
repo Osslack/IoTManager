@@ -23,10 +23,9 @@
 		};
 		
 		function onLogin() {
-			var username = $('#loginModal input#user').val();
-			var password = $('#loginModal input#password').val();
-			
-			alert(username + password);
+			var data = $('#loginModal form#loginForm').serializeArray();
+			//$.post(url, data, callback, "json");
+			//alert(data);
 			onClear();
 		}
 		

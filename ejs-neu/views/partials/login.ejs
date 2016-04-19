@@ -11,14 +11,14 @@
 		</div>
 	<!-- Modal body-->					
 		<div class="modal-body stylemodal" ">
-			<form role="form" >
+			<form role="form" id="loginForm" >
 				<div class="form-group">
 				  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Benutzername</label>
-				  <input type="text" class="form-control" id="user" placeholder="Benutzername">
+				  <input type="text" class="form-control" name="username" id="user" placeholder="Benutzername">
 				</div>
 				<div class="form-group">
 					<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Passwort</label>
-					<input type="password" class="form-control" id="password" placeholder="Passwort">
+					<input type="password" class="form-control" id="password" name="password" placeholder="Passwort">
 				</div>
 				<!-- Login Cancel Button -->
 				<button type="button" class="btn btn-success btn-md center-block" onclick="onLogin();"><span class="glyphicon glyphicon-log-in"></span> Login</button>
