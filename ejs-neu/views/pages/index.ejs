@@ -7,13 +7,14 @@
 	
 		$(document).ready(function(){  
 			document.getElementById('myNavbar').style.visibility='hidden';
+			document.getElementById('navBrand').style.visibility='hidden';
 			document.getElementById('menubutton').style.display='none';
-        $("#loginModal").modal("show");    
+        $("#loginModal").modal({backdrop: 'static', keyboard: false});    
 		});
 		
 		function onSwitchReg() {
 			$("#loginModal").modal("hide");
-			$("#regModal").modal("show");
+			$("#regModal").modal({backdrop: 'static', keyboard: false});
 		};
 		
 		function onBackLogin(){

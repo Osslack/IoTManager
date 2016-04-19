@@ -8,7 +8,52 @@
 	
 		function onCreateGadget(){
 		$("#createModal").modal("show");
-	}
+		}
+		var count = 0;
+		
+		function onGadgetEntry(){
+			var value = $("#createModal input#gadgetName").val();
+			var ip = $("#createModal input#ip").val();
+			var port = $("#createModal input#port").val();
+			
+			
+			//alert(value + " "+ ip + " "+ port);
+			$("#createModal").modal("hide");
+			createGadgetEntry(value, ip, port);
+			clearInput();
+			
+			
+		}
+		function createGadgetEntry(name, ip, port){
+			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">'+name +'</h3></div><div class="panel-body"><p>IP-Adresse:'+ip+'</p><P>Port:'+port+'</p><button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button></div></div>';
+			
+			if(count % 2 == 0){
+				$("#col1").prepend(panel);
+				count++;
+			}
+			else{
+				$("#col2").prepend(panel);
+				count++;
+			}
+			
+		}
+		
+		// clears the user input. Placeholder (like "Benutzername") is shown in each input field.
+		function clearInput(){
+			$("#createModal input#gadgetName").val('');
+			$("#createModal input#ip").val('');
+			$("#createModal input#port").val('');
+			
+			$("#createModal input").first().focus();
+		}
+		
+		// function which is executed, when the create Model is closed
+		function closeGadgetEntry(){
+			$("#createModal").modal("hide");
+			clearInput();
+		}
+		
+		
 		
 	</script>
 </head>
@@ -22,88 +67,15 @@
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
 				<main>
-				<div class="col-sm-6">
-					<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Gerätename</h3>
-						</div>
-						<div class="panel-body">
-							<p>IP-Adresse: 191.188.100.255</p>
-							<P>Port: 8000</p>
-							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
-						</div>
-						
-						 
-						</div>
-						
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>
-					<div class="jumbotron">
-						<h1>This is great</h1>
-						<p>Welcome to templating using EJS</p>
-					</div>
+				<div class="col-sm-6" id="col1">
+					
 				</div>
-				<div class="col-sm-6">
-					<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Gerätename</h3>
-						</div>
-						<div class="panel-body">
-							<p>IP-Adresse: 191.188.100.255</p>
-							<P>Port: 8000</p>
-							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
-						</div>
-						
-						 
-						</div><div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Gerätename</h3>
-						</div>
-						<div class="panel-body">
-							<p>IP-Adresse: 191.188.100.255</p>
-							<P>Port: 8000</p>
-							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
-						</div>
-						
-						 
-						</div><div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Gerätename</h3>
-						</div>
-						<div class="panel-body">
-							<p>IP-Adresse: 191.188.100.255</p>
-							<P>Port: 8000</p>
-							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
-						</div>
-						
-						 
-						</div><div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Gerätename</h3>
-						</div>
-						<div class="panel-body">
-							<p>IP-Adresse: 191.188.100.255</p>
-							<P>Port: 8000</p>
-							<button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-							<button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button>						
-						</div>
-						
-						 
-						</div>			
+				<div class="col-sm-6" id="col2">
+					
 				</div>	
 				</main>			
 				<!-- Include Modal create. It is activated by clicking the '+' Button in the buttom right corner -->
-				<button type="button" class="fixedbutton btn btn-primary" onclick="onCreateGadget()">
+				<button type="button" class="fixedbutton btn btn-primary" onclick="onCreateGadget()" id="createBtn">
 					<span class="glyphicon glyphicon-plus" ></span>
 				</button>
 				<% include ../partials/create %>

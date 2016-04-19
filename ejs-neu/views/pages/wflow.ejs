@@ -6,7 +6,13 @@
 	<script type="text/javascript">
 		function onCreateWflow(){
 		$("#createWorkflow").modal("show");
-	}
+		}
+	
+		function showData(){
+			var value = $("#createWorkflow input#gadgetname").val();
+			alert(value);
+			$("#createWorkflow").modal("hide");
+		}
 		
 	</script>
 </head>
