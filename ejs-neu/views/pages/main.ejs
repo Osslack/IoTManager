@@ -16,8 +16,6 @@
 			var ip = $("#createModal input#ip").val();
 			var port = $("#createModal input#port").val();
 			
-			
-			//alert(value + " "+ ip + " "+ port);
 			$("#createModal").modal("hide");
 			createGadgetEntry(value, ip, port);
 			clearInput();
@@ -25,7 +23,7 @@
 			
 		}
 		function createGadgetEntry(name, ip, port){
-			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">'+name +'</h3></div><div class="panel-body"><p>IP-Adresse:'+ip+'</p><P>Port:'+port+'</p><button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-ok"></span></button></div></div>';
+			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title">'+name +'</h2></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-remove"></div></div>';
 			
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
@@ -64,8 +62,8 @@
 	</header>
 		<div class="container">
 		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
 				<main>
 				<div class="col-sm-6" id="col1">
 					
@@ -92,7 +90,7 @@
 			
 
 		</div>
-		<div class="col-sm-4"></div>
+		<div class="col-sm-2"></div>
 	</div>	
 </div>
 		
