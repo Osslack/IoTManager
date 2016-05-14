@@ -1,82 +1,94 @@
-"use strict";
-var express = require('express');
-var db_users = require('./../dbActions/users.js');
-const router = new express.Router();
+import { Router } from 'express';
+import assert from 'assert';
 
+const router = new Router;
 var count = 0;
+
+
+
 router.post('/', (req, res) => {
-    console.log(req.body);
-    let {username, password} = req.body;
-    console.log("Hier");
+    let { username, name, password } = req.body;
     if(count == 0){
-        db_users.initUserCollection(req.app.db);
-        count = 1;
+        req.app.core.initUserCollection();
     }
-        console.log("Hier");
-    db_users.createUser(username, password,req.app.db)
-    	.then(function (){
-	        res.send('User created.');
-    	})
-    	.catch(function(){
-	        res.status(500).send('Username ' + username +' is already in use');
-    	});  
-});
-
-router.put("/:userId", (req, res) => {
-    let userId = req.params.userId;
-    let user = req.body;
-    if(req.session.user = userId){
-    db_users.updateUser(userId, user, app.db)
+    console.log(111111);
+    req.app.core.createUser(username, name, password)
         .then(function (){
-            res.send('User updated.');
+            res.send('User created.');
         })
-        .catch(function(){
+        .catch(function(e){
             res.status(500).send('Username ' + username +' is already in use');
-        });
-    }
-    else res.status("403").send('You dont have permission to do that.');  
+        });  
 });
 
-router.delete("/:userId", (req,res) => {
-    let userId = req.params.userId;
-    if(req.session.user === userId){
-    db_users.deleteUser(userId, app.db)
+router.put('/', (req, res) => {
+    let { password_old, password_new } = req.body;
+    req.app.core.authUser(req.session.user.username, password_old)
+    .then(user => {
+        req.app.core.updateUser(user.username, password_new)
+        .then(() => {
+             res.send('User updated.');
+        })
+        .catch(e => {
+            console.error(e);
+            res.status(500).send("Could not update");
+        })
+    })
+    .catch(e => {
+            console.error(e);
+            res.status(500).send("Could not update");
+    })
+});
+
+router.delete("/", (req,res) => {
+    req.app.core.deleteUser(req.session.user.username)
         .then(function(){
-            res.send('User ' + userId + ' was succesfully deleted.');
+            req.session = null;
+            res.send('User ' + req.session.user.username + ' was succesfully deleted.');
         })
         .catch(function(){
-            res.status(500).send('User ' + userId + ' could not be deleted.');
-        });
-    }
-    else res.send(403).send('You do not have permission to do that.');
-        
+            res.status(500).send('User ' + req.session.user.username + ' could not be deleted.');
+        });   
 });
 
 
 router.post("/login", (req, res) => {
-    let user = req.body;  
-    db_users.authUser(user.username, user.password)
-    .then(function() {
-            req.session.user = username;
+    console.log(req.body);
+    let {username, password} = req.body;  
+    if (username === undefined || password === undefined) {
+        res.status(400).send('Both username and password have to be provided.');
+        return;
+    }
+    req.app.core.authUser(username, password)
+        .then(user => {
+            req.session.user = {
+                id      : user._id,
+                username: user.username
+            };
             req.session.authenticated = true;
             res.send('Succesfully authenticated user ' + username );
-                
         })
-    .catch(function(e){
-        console.log(e)
-        res.status(403).send('Authentication for user ' + username + ' failed');
+        .catch(function(e){
+            console.log(e);
+            res.status(403).send('Authentication for user ' + username + ' failed');
         });
 });
 
+router.post("/logout" ,(req,res) =>{
+    delete req.session.authenticated
+    delete req.session.user;
+    res.send('User succesfully logged out');
+})
+
 router.authenticate = (req, res, next) => {
-    console.log("authentication: " + req.session);
     if(req.session.authenticated) {
+        console.log('Authenticated ' + req.session.user.username);
         next();
     }
     else {
+        console.log('Authentication failed.');
         res.status(403).send('Could not authenticate');
     }
 };
-
 
 module.exports = router;
