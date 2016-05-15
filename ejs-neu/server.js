@@ -44,6 +44,7 @@ core.createCore()
 		.then(function(core) {
 			// Start the server
 			app.core = core;
+			app.use('/static', express.static(__dirname + '/public'));
 			APIroutes.setUp(app);
 			return app.listen(8088);
 			

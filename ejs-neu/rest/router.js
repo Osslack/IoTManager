@@ -8,7 +8,6 @@ const router = new express.Router();
 const MongoStore = connect(session);
 
 function setUp(app){
-	console.log(1);
 	router.use(session({
 		secret: "KappaRino",
 		store: new MongoStore({db: app.core.db}),
@@ -30,7 +29,6 @@ function setUp(app){
 
 	// main page 
 	app.use('/main', function(req, res) {
-		//res.send('kappa');
 		res.render('pages/main');
 	});
 
@@ -38,6 +36,7 @@ function setUp(app){
 	app.use('/wflow', function(req, res) {
 		res.render('pages/wflow');
 	});
+	
 	app.use((req, res, next) => {
 		res.status(404).send("Nothing found.")
 	});
