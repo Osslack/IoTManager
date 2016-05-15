@@ -47,6 +47,8 @@
 		
 		function onRegister(){
 			var data = $('#regModal form#registerForm').serializeArray();
+			  
+			
 			var username = data[0].value;
 			var password = data[1].value;
 			var password2 = data[2].value;
@@ -71,6 +73,9 @@
 					}
 					
 				});
+				}
+				else{
+					$('#password2').parent('div').removeClass('.has-success').addClass('has-error');
 				}
 				
 		}
