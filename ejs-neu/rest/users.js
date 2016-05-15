@@ -11,7 +11,6 @@ router.post('/', (req, res) => {
     if(count == 0){
         req.app.core.initUserCollection();
     }
-    console.log(111111);
     req.app.core.createUser(username, name, password)
         .then(function (){
             res.send('User created.');

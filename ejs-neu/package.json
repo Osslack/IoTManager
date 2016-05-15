@@ -21,7 +21,8 @@
     "node-gyp": "^3.3.1"
   },
   "scripts": {
-    "start": "babel-node server.js"
+    "start": "babel-node server.js",
+    "babel-version" : "babel --version"
   },
   "devDependencies": {
     "babel": "^6.5.2",
