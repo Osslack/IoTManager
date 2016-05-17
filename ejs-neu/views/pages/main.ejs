@@ -5,25 +5,65 @@
     <% include ../partials/head %>
 	
 	<script type="text/javascript">
-	
+		
+		$(document).ready(function(){
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "GET",
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		});
+		
+		
 		function onCreateGadget(){
 		$("#createModal").modal("show");
 		}
+		
 		var count = 0;
 		
 		function onGadgetEntry(){
-			var value = $("#createModal input#gadgetName").val();
-			var ip = $("#createModal input#ip").val();
+			
+			var name = $("#createModal input#gadgetName").val();
+			var adress = $("#createModal input#ip").val();
 			var port = $("#createModal input#port").val();
 			
-			$("#createModal").modal("hide");
-			createGadgetEntry(value, ip, port);
-			clearInput();
+			if( name && adress && port){
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "POST",
+				data: {
+					name,
+					adress,
+					port
+				},
+				success: function(data){
+					console.log(data);
+					$("#createModal").modal("hide");
+					createGadgetEntry(name, adress, port);
+					clearInput();
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+			
+			
+			}
+			else{
+				$('#ip').parent('div').addClass('has-error');
+				$('#gadgetName').parent('div').addClass('has-error');
+				$('#port').parent('div').addClass('has-error');
+			}
 			
 			
 		}
 		function createGadgetEntry(name, ip, port){
-			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title">'+name +'</h2></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-remove"></span></button><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
+			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
 			
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
@@ -40,14 +80,17 @@
 		function clearInput(){
 			$("#createModal input#gadgetName").val('');
 			$("#createModal input#ip").val('');
-			$("#createModal input#port").val('');
-			
+			$("#createModal input#port").val('');			
 			$("#createModal input").first().focus();
+			$('#ip').parent('div').removeClass('has-error');
+			$('#gadgetName').parent('div').removeClass('has-error');
+			$('#port').parent('div').removeClass('has-error');
 		}
 		
 		// function which is executed, when the create Model is closed
 		function closeGadgetEntry(){
 			$("#createModal").modal("hide");
+			
 			clearInput();
 		}
 		
