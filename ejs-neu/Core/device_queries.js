@@ -4,8 +4,11 @@ function initDeviceCollection( ){
 };
 
 function createDevice(device){
-	console.log(device);
     return this.db.collection("devices").insertOne(device);
+}
+
+function getDevices(username){
+
 }
 
 

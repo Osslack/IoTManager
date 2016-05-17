@@ -18,13 +18,11 @@ function updateUser(username, password_new){
 }
 
 function deleteUser(username){
-	console.log(username);
 	return this.db.collection("users").remove({"username":username});
 }
 
 function authUser(username, password){
 	password = hashPassword(password);
-	console.log(password);
 	return this.db.collection("users").findOne({"username":username, "password" : password });
 }
 
