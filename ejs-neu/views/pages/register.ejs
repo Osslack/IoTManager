@@ -32,7 +32,8 @@
 						password
 					},
 					success: function(data){
-						alert(data);
+						console.log(data);
+						window.location="http://localhost:8088/devices";
 					},
 					error: function(data){
 						console.log(data);
@@ -50,7 +51,8 @@
 				
 		}
 		function onBackLogin(){
-			window.location="http://www.google.de";
+				window.location="http://localhost:8088/login";
+				
 		}
 		
 	

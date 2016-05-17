@@ -9,7 +9,7 @@
 			document.getElementById('myNavbar').style.visibility='hidden';
 			document.getElementById('navBrand').style.visibility='hidden';
 			document.getElementById('menubutton').style.display='none';
-			$("#loginModal").modal({backdrop: 'static', keyboard: false});    
+			    
 		});
 		
 		function onLogin() {
@@ -27,19 +27,8 @@
 					console.log(data);
 					$('#user').parent('div').removeClass('has-error');
 					$('#password2').parent('div').removeClass('has-error');
-					$.ajax({
-						url: "http://localhost:8088/main",
-						method: "GET",
-						data: {
-							username
-						},
-						success: function(data){
-							console.log(data);
-						},
-						error: function(data){
-							console.log(data);
-						}
-					});
+					window.location="http://localhost:8088/";
+					
 					//GET METHOD zur Hauptseite
 					
 				},
@@ -55,7 +44,10 @@
 		}
 		
 		function onSwitchReg(){
-			window.location="http://www.google.de";
+			
+				
+					window.location="http://localhost:8088/register";
+			
 		}
 		
 			
