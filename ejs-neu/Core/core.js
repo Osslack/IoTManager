@@ -1,5 +1,6 @@
-import mongo from 'mongodb';
-import users from './user_queries';
+import mongo 	from 'mongodb';
+import users 	from './user_queries';
+import devices 	from './device_queries';
 
 
 /**
@@ -14,15 +15,10 @@ function Core(dbConnection){
 
 // Assign the modules to the core
 Object.assign(Core.prototype, users);
+Object.assign(Core.prototype, devices);
 
 
 
-/**
- * createCore:
- * A utility method that creates a core using
- * the default database connection configured
- * at 'database.url' in the config file.
- */
 
 const db_url = "mongodb://localhost/iot";
 
@@ -31,6 +27,8 @@ function createCore() {
 	var promise = mongo.MongoClient.connect(db_url)
 		.then(function(db){
 			var core = new Core(db);
+			core.initUserCollection();
+			core.initDeviceCollection();
 			return core;
 		})
 		.catch( (e) => {

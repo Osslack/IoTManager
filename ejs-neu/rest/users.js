@@ -8,9 +8,9 @@ var count = 0;
 
 router.post('/', (req, res) => {
     let { username, name, password } = req.body;
-    if(count == 0){
+    /*if(count == 0){
         req.app.core.initUserCollection();
-    }
+    }*/
     req.app.core.createUser(username, name, password)
         .then(function (){
             res.send('User created.');
