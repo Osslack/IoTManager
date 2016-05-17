@@ -1,13 +1,11 @@
 class Device {
 
 	constructor(dbDevice = {}) {
-		console.log(dbDevice);
 		this._obj = dbDevice;
 		this._obj.name = this._obj.name || '';
 		this._obj.adress = this._obj.adress || [];
 		this._obj.port = this._obj.port || '';
 		this._obj.owner = this._obj.owner || '';
-		console.log(this._obj);
 	}
 
 	get id() {

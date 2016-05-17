@@ -32,15 +32,15 @@ function setUp(app){
 	app.use('/', function(req, res) {
 		res.render('pages/index');
 	});
-	// main page 
-	app.use('/main', function(req, res) {
+	// main page
+	app.use('/main', auth , function(req, res) {
 		res.render('pages/main');
 	});
-	// wflow page 
-	app.use('/wflow', function(req, res) {
+	// wflow page
+	app.use('/wflow', auth , function(req, res) {
 		res.render('pages/wflow');
 	});
-	
+
 	//Handle nonexisting routes
 	app.use((req, res, next) => {
 		res.status(404).send("Nothing found.")
@@ -54,4 +54,3 @@ function setUp(app){
 };
 
 module.exports.setUp = setUp;
-
