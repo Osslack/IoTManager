@@ -27,25 +27,33 @@
 			var username = data[0].value;
 			var password = data[1].value;
 			$.ajax({
-				url: "http://localhost:8088/api/v1/users/login/",
-				method: "Post",
-				date: {
+				url: "http://localhost:8088/api/v1/users/login",
+				method: "POST",
+				data: {
 					username,
 					password
-				}
+				},
+				success: function(data){
+					alert(data);
+				},
+				
+				error: function(data){
+					console.log(data);
+				},
 			});
-			//$.post(url, data, callback, "json");
-			//alert(data);
-			onClear();
+			
+			//onClear();
 		}
 		
 		function onRegister(){
 			var data = $('#regModal form#registerForm').serializeArray();
+			  
+			
 			var username = data[0].value;
 			var password = data[1].value;
 			var password2 = data[2].value;
 			
-			if(password === password2){
+			if(password === password2 && password.length >=8){
 			
 		
 			$.ajax({
@@ -54,8 +62,20 @@
 					data: {
 						username,
 						password
+					},
+					success: function(data){
+						alert(data);
+					},
+					error: function(data){
+						console.log(data);
+						
+						
 					}
-				}).done( () => {console.log("Logged in as user "+ username);}).fail( e => {console.log("fehler : "+e);});
+					
+				});
+				}
+				else{
+					$('#password2').parent('div').removeClass('.has-success').addClass('has-error');
 				}
 				
 		}
