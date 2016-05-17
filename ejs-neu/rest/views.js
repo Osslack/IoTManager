@@ -11,7 +11,6 @@ router.get('/', function(req, res) {
 //device page
 router.get('/devices', function(req, res) {
 	res.render('pages/main');
-  }
 });
 
 router.get('/login', function(req,res) {
