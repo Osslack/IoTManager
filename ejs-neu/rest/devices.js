@@ -5,8 +5,8 @@ const router = new Router;
 
 router.post('/', (req,res) => {
 	let {name, adress, port } = req.body;
-	let username = req.session.user.username;
-	let device = new Device({name, adress, port, username});
+	let owner = req.session.user.username;
+	let device = new Device({name, adress, port, owner});
 	req.app.core.createDevice(device)
 		.then((device) => {
 			res.send(device);
@@ -28,5 +28,19 @@ router.get('/', (req,res) => {
 		})
 })
 
+router.delete('/', (req,res) => {
+	let {name, adress, port } = req.body;
+	let owner = req.session.user.username;
+	let device = new Device({name, adress, port, owner});
+	req.app.core.deleteDevice(device)
+	.then(() => {
+		res.send('Deleted Device.');
+	})
+	.catch((e) => {
+		console.error(e);
+		res.status(500).send('Could not delete device');
+	})
+
+})
 
 module.exports = router;

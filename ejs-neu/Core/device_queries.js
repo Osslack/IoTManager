@@ -21,7 +21,11 @@ function getDevices(username){
 	})
 	return result;
 }
+function deleteDevice(device){
+	return this.db.collection("devices").remove(device);
+}
 
+module.exports.deleteDevice = deleteDevice;
 module.exports.getDevices = getDevices;
 module.exports.createDevice = createDevice;
 module.exports.initDeviceCollection = initDeviceCollection;
