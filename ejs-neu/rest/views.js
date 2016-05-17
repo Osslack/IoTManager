@@ -5,19 +5,11 @@ let router = new Router();
 //Serve the basic pages
 //index
 router.get('/', function(req, res) {
-  console.log(req);
-  if(req.session === undefined){
-    res.redirect('/login')
-  }else{
     res.redirect('/devices')
-  }
 });
 
 //device page
 router.get('/devices', function(req, res) {
-  if(req.session === undefined){
-    res.redirect('/login');
-  }else{
 	res.render('pages/main');
   }
 });
@@ -32,11 +24,7 @@ router.get('/register', function(req,res) {
 
 // workflow page
 router.get('/wflow', function(req, res) {
-  if(req.session === undefined){
-    res.redirect('/login');
-  }else{
 	res.render('pages/wflow');
-  }
 });
 
 module.exports = router;
