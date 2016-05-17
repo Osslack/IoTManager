@@ -1,10 +1,9 @@
 import crypto from "crypto";
 
 
-function createUser(username, name, password) {
+function createUser(username, password) {
     password = hashPassword(password);
-    return this.db.collection("users").insertOne({username, name, password});
-
+    return this.db.collection("users").insertOne({username, password});
 }
 
 function initUserCollection( ){

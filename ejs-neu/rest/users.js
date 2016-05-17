@@ -7,17 +7,14 @@ var count = 0;
 
 
 router.post('/', (req, res) => {
-    let { username, name, password } = req.body;
-    /*if(count == 0){
-        req.app.core.initUserCollection();
-    }*/
-    req.app.core.createUser(username, name, password)
+    let { username, password } = req.body;
+    req.app.core.createUser(username, password)
         .then(function (){
             res.send('User created.');
         })
         .catch(function(e){
             res.status(500).send('Username ' + username +' is already in use');
-        });  
+        });
 });
 
 router.put('/', (req, res) => {
@@ -47,13 +44,13 @@ router.delete("/", (req,res) => {
         })
         .catch(function(){
             res.status(500).send('User ' + req.session.user.username + ' could not be deleted.');
-        });   
+        });
 });
 
 
 router.post("/login", (req, res) => {
     console.log(req.body);
-    let {username, password} = req.body;  
+    let {username, password} = req.body;
     if (username === undefined || password === undefined) {
         res.status(400).send('Both username and password have to be provided.');
         return;

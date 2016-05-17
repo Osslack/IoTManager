@@ -5,6 +5,7 @@ let router = new Router();
 //Serve the basic pages
 //index
 router.get('/', function(req, res) {
+  console.log(req);
   if(req.session === undefined){
     res.redirect('/login')
   }else{
