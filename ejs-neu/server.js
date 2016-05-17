@@ -20,14 +20,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
+
+
+
+
+
 core.createCore()
 		.then(function(core) {
 			// Start the server
 			app.core = core;
+
+
+
 			app.use('/static', express.static(__dirname + '/public'));
 			routes.setUp(app);
 			return app.listen(8088);
-			
+
 		})
 		.then(() => {
 			console.log('8088 is the magic port');
@@ -39,4 +47,3 @@ core.createCore()
 
 
 module.exports = app;
-

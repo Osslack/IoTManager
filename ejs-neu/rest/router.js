@@ -2,6 +2,7 @@ const express = require('express');
 const connect = require('connect-mongo');
 const server = require('../server.js');
 const session = require('express-session');
+const views = require('./views.js');
 var users = require('./users.js');
 var devices = require('./devices.js');
 
@@ -22,24 +23,13 @@ function setUp(app){
 	// add the routes
 	router.use('/users', users);
 	router.use('/devices', auth, devices);
+	app.use('/', views);
 
 	// add the router to the app
 	var apiBaseUrl = '/api/v1';
 	app.use(apiBaseUrl, router);
 
-	//Serve the basic pages
-	//index
-	app.use('/', function(req, res) {
-		res.render('pages/index');
-	});
-	// main page
-	app.use('/main', auth , function(req, res) {
-		res.render('pages/main');
-	});
-	// wflow page
-	app.use('/wflow', auth , function(req, res) {
-		res.render('pages/wflow');
-	});
+
 
 	//Handle nonexisting routes
 	app.use((req, res, next) => {
