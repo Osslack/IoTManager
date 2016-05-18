@@ -3,6 +3,7 @@ const connect = require('connect-mongo');
 const server = require('../server.js');
 const session = require('express-session');
 const views = require('./views.js');
+const actions = require('./actions.js');
 var users = require('./users.js');
 var devices = require('./devices.js');
 
@@ -21,6 +22,7 @@ function setUp(app){
     var auth = users.authenticate;
 
 	// add the routes
+	router.use('/actions', auth, actions);
 	router.use('/users', users);
 	router.use('/devices', auth, devices);
 	app.use('/', views);

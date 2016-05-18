@@ -1,7 +1,7 @@
 import { Device } from './device';
 
 function initDeviceCollection( ){
-	this.db.collection("devices").createIndex( { "adress": 1, "port": 1, "owner": 1}, { unique: true } );
+	this.db.collection("devices").createIndex( { "name": 1, "owner": 1}, { unique: true } );
 	console.log("Created Unique Key");
 };
 
