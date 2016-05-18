@@ -7,6 +7,7 @@ class Device {
 		this._obj.name = this._obj.name || '';
 		this._obj.adress = this._obj.adress || [];
 		this._obj.port = this._obj.port || '';
+		this._obj.actions = this._obj.actions || [];
 		this._obj.owner = this._obj.owner || '';
 	}
 
@@ -51,6 +52,18 @@ class Device {
 		this._obj.owner = value;
 	}
 
+	get actions(){
+		return this._obj.actions;
+	}
+
+	set actions(value){
+		this._obj.actions = value;
+	}
+
+	addAction(action){
+		this._obj.actions.push(action);
+	}
+
 	get dbRepresentation() {
 
         // assemble the object for the database.
@@ -62,24 +75,29 @@ class Device {
         return dbObj;
     }
 
-		get userRepresentation() {
-	        let result = {
-	            id: this.id,
-	            name: this.name,
-	            adress: this.adress,
-							port : this.port,
-							owner : this.owner
-	        };
-	        return result;
-	    }
+	get userRepresentation() {
+		let actions = this.actions.map(
+			action => action.userRepresentation
+		);
+	  let result = {
+	      id: this.id,
+	      name: this.name,
+	      adress: this.adress,
+				port : this.port,
+				actions : actions,
+				owner : this.owner
+	  };
+	  return result;
+	  }
 
-	    set userRepresentation(obj) {
-	        if (obj.id)     this.id = ObjectID(obj.id);
-	        if (obj.name !== undefined)  this.name = obj.name;
-	        if (obj.adress !== undefined) this.adress = obj.adress;
-					if (obj.port !== undefined) this.port = obj.port;
-					if (obj.owner !== undefined) this.owner = obj.owner;
-	    }
+	  set userRepresentation(obj) {
+	      if (obj.id)     this.id = ObjectID(obj.id);
+	      if (obj.name !== undefined)  this.name = obj.name;
+	      if (obj.adress !== undefined) this.adress = obj.adress;
+				if (obj.port !== undefined) this.port = obj.port;
+				if (actions)
+				if (obj.owner !== undefined) this.owner = obj.owner;
+	  }
 }
 
 module.exports.Device = Device;
