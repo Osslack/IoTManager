@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import request from 'request';
 
 class Action {
 
@@ -39,6 +40,20 @@ class Action {
 
 	set route(value) {
 		this._obj.route = value;
+	}
+
+	run(adress, port){
+		switch(this._obj.type) {
+    case 'GET':
+      //  code block
+        break;
+    case 'POST':
+      //  code block
+        break;
+    case 'DELETE':
+		 //		code block
+				break;
+			}
 	}
 
 

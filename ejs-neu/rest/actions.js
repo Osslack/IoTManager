@@ -21,5 +21,17 @@ router.post('/', (req,res) => {
   })
 });
 
+router.post('/run' ,(req,res)=> {
+  let {actionName, deviceName} = req.body;
+  let owner = req.session.user.username;
+  req.app.core.runAction(actionName, deviceName, owner)
+  .then( (status) => {
+    res.send(status);
+  })
+  .catch((e) => {
+    res.status(500).send("Could not run action");
+  })
+})
+
 
 module.exports = router;

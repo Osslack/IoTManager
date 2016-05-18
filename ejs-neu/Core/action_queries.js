@@ -18,5 +18,8 @@ function addAction(action, deviceName, owner){
       });
 }
 
+function runAction(actionName, deviceName, owner) {
+
+}
 module.exports.initActionCollection = initActionCollection;
 module.exports.addAction = addAction;
