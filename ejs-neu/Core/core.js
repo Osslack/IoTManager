@@ -1,6 +1,7 @@
 import mongo 	from 'mongodb';
 import users 	from './user_queries';
 import devices 	from './device_queries';
+import actions from './action_queries';
 
 
 /**
@@ -16,7 +17,7 @@ function Core(dbConnection){
 // Assign the modules to the core
 Object.assign(Core.prototype, users);
 Object.assign(Core.prototype, devices);
-
+Object.assign(Core.prototype, actions);
 
 
 
@@ -29,6 +30,7 @@ function createCore() {
 			var core = new Core(db);
 			core.initUserCollection();
 			core.initDeviceCollection();
+			core.initActionCollection();
 			return core;
 		})
 		.catch( (e) => {

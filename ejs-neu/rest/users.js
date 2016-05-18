@@ -57,11 +57,13 @@ router.post("/login", (req, res) => {
     }
     req.app.core.authUser(username, password)
         .then(user => {
+          console.log(user);
             req.session.user = {
                 id      : user._id,
                 username: user.username
             };
             req.session.authenticated = true;
+            console.log(req.session)
             res.send('Succesfully authenticated user ' + username );
         })
         .catch(function(e){
@@ -71,6 +73,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/logout" ,(req,res) =>{
+    console.log('Kappa')
     delete req.session.authenticated
     delete req.session.user;
     res.send('User succesfully logged out');

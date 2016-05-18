@@ -1,4 +1,23 @@
 <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+<script type="text/javascript">
+function onLogout(){
+		console.log("test");
+	$.ajax({
+		url: "http://localhost:8088/api/v1/users/logout",
+		method: "POST",
+		data: {},
+		success: function(data){
+			console.log(data);
+			window.location="http://localhost:8088/";
+		},
+		error: function(data){
+			console.log(data);
+			window.location="http://localhost:8088/";
+		}
+	});
+}
+</script>
+
 <!-- Images above the menu bar. Disappears by scrolling -->
 <div class="container-fluid test2" >
 	  <h1>IoT Manager</h1>
@@ -26,7 +45,7 @@
         <li><a href="/wflow">Workflow</a></li>
 		</ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-out" onclick="onLogout()"></span> Logout</a></li>
       </ul>
     </div>
   </div>
