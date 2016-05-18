@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 class Device {
 
 	constructor(dbDevice = {}) {
@@ -54,12 +56,30 @@ class Device {
         // assemble the object for the database.
         let dbObj = Object.assign({}, this._obj);
 
-        dbObj._id = new ObjectID(dbObj._id);
+        dbObj._id = new ObjectId(dbObj._id);
 
         // return
         return dbObj;
     }
 
+		get userRepresentation() {
+	        let result = {
+	            id: this.id,
+	            name: this.name,
+	            adress: this.adress,
+							port : this.port,
+							owner : this.owner
+	        };
+	        return result;
+	    }
+
+	    set userRepresentation(obj) {
+	        if (obj.id)     this.id = ObjectID(obj.id);
+	        if (obj.name !== undefined)  this.name = obj.name;
+	        if (obj.adress !== undefined) this.adress = obj.adress;
+					if (obj.port !== undefined) this.port = obj.port;
+					if (obj.owner !== undefined) this.owner = obj.owner;
+	    }
 }
 
 module.exports.Device = Device;

@@ -4,8 +4,6 @@ import assert from 'assert';
 const router = new Router;
 var count = 0;
 
-
-
 router.post('/', (req, res) => {
     let { username, password } = req.body;
     req.app.core.createUser(username, password)
@@ -47,7 +45,6 @@ router.delete("/", (req,res) => {
         });
 });
 
-
 router.post("/login", (req, res) => {
     console.log(req.body);
     let {username, password} = req.body;
@@ -73,7 +70,6 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/logout" ,(req,res) =>{
-    console.log('Kappa')
     delete req.session.authenticated
     delete req.session.user;
     res.send('User succesfully logged out');

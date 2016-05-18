@@ -4,12 +4,17 @@ import { Device } from '../Core/device.js';
 const router = new Router;
 
 router.post('/', (req,res) => {
-	let {name, adress, port } = req.body;
-	let owner = req.session.user.username;
-	let device = new Device({name, adress, port, owner});
+	// check the request
+  let userObject = req.body;
+
+  // create device
+  let owner = req.session.user.username;
+  let device = new Device();
+  device.userRepresentation = userObject;
+  device.owner = owner;
 	req.app.core.createDevice(device)
 		.then((device) => {
-			res.send(device);
+			res.send(device.userRepresentation);
 		})
 		.catch((e) => {
 			console.error(e);
