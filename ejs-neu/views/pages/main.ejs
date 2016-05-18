@@ -213,7 +213,7 @@
 			console.log(event.path[2].id);
 			var actionName = event.path[0].id;
 			var deviceName = event.path[2].id;
-			/*$.ajax({
+			$.ajax({
 				url: "http://localhost:8088/api/v1/actions/run/",
 				method: "POST",
 				data: {
@@ -226,7 +226,7 @@
 				error: function(){
 					$("#requestFail").modal("show");
 				}
-			});*/
+			});
 		}
 		
 		
