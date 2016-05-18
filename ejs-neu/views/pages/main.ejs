@@ -3,7 +3,7 @@
 <head>
     <link rel="styleSheet" type="text/css" href="static/css/style.css" />
     <% include ../partials/head %>
-<<<<<<< HEAD
+
 
 	<script type="text/javascript">
 
@@ -12,12 +12,18 @@
 				url: "http://localhost:8088/api/v1/devices",
 				method: "GET",
 				success: function(data){
+					console.log(data.length);
 					console.log(data);
-					for(i = 0; i < data.length; i++){
+					for(var i = 0; i < data.length; i++){
+						console.log(i);
+						console.log(data[i]);
 						var name = data[i].name;
 						var adress = data[i].adress;
 						var port = data[i].port;
-						createGadgetEntry(name, adress, port);
+						var actions;
+						actions = data[i].actions;
+						
+						createGadgetEntry(name, adress, port, actions);
 					}
 				},
 				error: function(data){
@@ -72,15 +78,26 @@
 
 
 		}
-		function createGadgetEntry(name, ip, port){
-
-
+		
+		
+		function createGadgetEntry(name, ip, port,actions){
+			var button = '';			
+			var begin = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div>';
+			var end = '</div></div>';
+			var footer = '<div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button>';
+			var panel;
 			
+			if(actions.length == 0){
+				panel = begin+footer+end;
+			}
+			else{
+			for(var a=0; a < actions.length; a++){
+					button += '<button class="btn btn-xs btn-success" onclick="runAction(event)" id='+actions[a].name+'>'+actions[a].name+'</button>'
+				}
+				panel = begin+footer+button+end;
+				
+			}
 			
-
-			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button></div></div>';
-
-
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
 				count++;
@@ -177,6 +194,7 @@
 				},
 				success: function(data){
 					console.log(data);
+					window.location="http://localhost:8088/";
 				},
 				error: function(data){
 					console.log(data);
@@ -188,6 +206,27 @@
 			$("#createAction").modal("hide");
 			$("#createAction input#action").val('');
 			$("#createAction input#route").val('');
+		}
+		
+		function runAction(){
+			console.log(event.path[0].id);
+			console.log(event.path[2].id);
+			var actionName = event.path[0].id;
+			var deviceName = event.path[2].id;
+			/*$.ajax({
+				url: "http://localhost:8088/api/v1/actions/run/",
+				method: "POST",
+				data: {
+					actionName,
+					deviceName
+				},
+				success: function(){
+					$("#runRequest").modal("show");
+				},
+				error: function(){
+					$("#requestFail").modal("show");
+				}
+			});*/
 		}
 		
 		
@@ -226,6 +265,8 @@
 				</button>
 				<% include ../partials/create %>
 				<% include ../partials/createAction %>
+				<% include ../partials/request %>
+				<% include ../partials/requestFail %>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
