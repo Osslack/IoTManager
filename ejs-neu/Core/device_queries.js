@@ -32,17 +32,15 @@ function deleteDevice(name, owner){
 function updateDevice(device){
     let data = device.dbRepresentation;
     let id = ObjectId(device.id.toString());
-		console.log(id);
-
     delete data._id;
 
     //  $set specifies the data to change, fields not supplied in data will not be changed
-    return this.db.collection("entries").findAndModify(
+    return this.db.collection("devices").findAndModify(
         {'_id': id }, [], {"$set": data}, { "new" : true }
     ).then(cursor => {
         let newData = cursor.value;
-				console.log(newData);
         let newDevice = new Device(newData);
+
         return newDevice;
     });
 }

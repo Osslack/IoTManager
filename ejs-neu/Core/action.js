@@ -54,22 +54,21 @@ class Action {
         // return
         return dbObj;
     }
-		get userRepresentation() {
-					let result = {
-							id: this.id,
-							name: this.name,
-							type: this.type,
-							route : this.route,
-					};
-					return result;
-			}
 
-			set userRepresentation(obj) {
-					if (obj.id)     this.id = ObjectID(obj.id);
-					if (obj.name !== undefined)  this.name = obj.name;
-					if (obj.type !== undefined) this.type = obj.type;
-					if (obj.route !== undefined) this.route = obj.route;
-			}
+	get userRepresentation() {
+				let result = {
+						name: this.name,
+						type: this.type,
+						route : this.route,
+				};
+				return result;
+		}
+
+		set userRepresentation(obj) {
+				if (obj.name !== undefined)  this.name = obj.name;
+				if (obj.type !== undefined) this.type = obj.type;
+				if (obj.route !== undefined) this.route = obj.route;
+		}
 
 }
 

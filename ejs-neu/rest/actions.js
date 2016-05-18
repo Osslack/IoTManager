@@ -13,7 +13,6 @@ router.post('/', (req,res) => {
   action.userRepresentation = userObject;
   req.app.core.addAction(action, deviceName, owner)
   .then( (device) => {
-    console.log(1)
     res.send(device.userRepresentation);
   })
   .catch( (e) => {

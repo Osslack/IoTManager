@@ -9,7 +9,6 @@ var devices = require('./devices.js');
 
 const router = new express.Router();
 const MongoStore = connect(session);
-const router2 = new express.Router();
 
 function setUp(app){
 	router.use(session({
