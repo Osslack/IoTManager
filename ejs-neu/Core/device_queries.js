@@ -1,4 +1,5 @@
 import { Device } from './device';
+import { ObjectId } from 'mongodb';
 
 function initDeviceCollection( ){
 	this.db.collection("devices").createIndex( { "name": 1, "owner": 1}, { unique: true } );
@@ -24,21 +25,22 @@ function getDevices(username){
 	})
 	return result;
 }
-function deleteDevice(device){
-	return this.db.collection("devices").remove(device);
+function deleteDevice(name, owner){
+	return this.db.collection("devices").remove({ "name" : name, "owner" : owner});
 }
 
 function updateDevice(device){
     let data = device.dbRepresentation;
-    let id = device.id;
+    let id = ObjectId(device.id.toString());
     delete data._id;
 
     //  $set specifies the data to change, fields not supplied in data will not be changed
-    return this.db.collection("entries").findAndModify(
-        {_id: id}, [], {"$set": data}, {"new": true}
+    return this.db.collection("devices").findAndModify(
+        {'_id': id }, [], {"$set": data}, { "new" : true }
     ).then(cursor => {
         let newData = cursor.value;
         let newDevice = new Device(newData);
+
         return newDevice;
     });
 }

@@ -1,4 +1,4 @@
-import { Mongo } from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 class Action {
 
@@ -7,8 +7,6 @@ class Action {
 		this._obj.name = this._obj.name || '';
     this._obj.type = this._obj.type || 'GET';
     this._obj.route = this._obj.route || '/';
-    this._obj.deviceName = this._obj.deviceName || '';
-		this._obj.owner = this._obj.owner || '';
 	}
 
 	get id() {
@@ -43,22 +41,6 @@ class Action {
 		this._obj.route = value;
 	}
 
-	//The "Owner" of the device
-	get deviceName(){
-		return this._obj.deviceName;
-	}
-
-	set deviceName(value){
-		this._obj.deviceName = value;
-	}
-
-	get owner(){
-		return this._obj.owner;
-	}
-
-	set owner(value){
-		this._obj.owner = value;
-	}
 
 
 
@@ -67,31 +49,26 @@ class Action {
         // assemble the object for the database.
         let dbObj = Object.assign({}, this._obj);
 
-        dbObj._id = new ObjectID(dbObj._id);
+        dbObj._id = new ObjectId(dbObj._id);
 
         // return
         return dbObj;
     }
-		get userRepresentation() {
-					let result = {
-							id: this.id,
-							name: this.name,
-							type: this.type,
-							route : this.route,
-							deviceName : this.deviceName,
-							owner : this.owner
-					};
-					return result;
-			}
 
-			set userRepresentation(obj) {
-					if (obj.id)     this.id = ObjectID(obj.id);
-					if (obj.name !== undefined)  this.name = obj.name;
-					if (obj.type !== undefined) this.type = obj.type;
-					if (obj.route !== undefined) this.route = obj.route;
-					if (obj.deviceName !== undefined) this.deviceName = obj.deviceName;
-					if (obj.owner !== undefined) this.owner = obj.owner;
-			}
+	get userRepresentation() {
+				let result = {
+						name: this.name,
+						type: this.type,
+						route : this.route,
+				};
+				return result;
+		}
+
+		set userRepresentation(obj) {
+				if (obj.name !== undefined)  this.name = obj.name;
+				if (obj.type !== undefined) this.type = obj.type;
+				if (obj.route !== undefined) this.route = obj.route;
+		}
 
 }
 

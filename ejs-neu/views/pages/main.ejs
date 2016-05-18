@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="styleSheet" type="text/css" href="static/css/style.css" />
+    <link rel="styleSheet" type="text/css" href="static/css/style.css" />
     <% include ../partials/head %>
+<<<<<<< HEAD
 
 	<script type="text/javascript">
 
@@ -149,22 +150,38 @@
 			});
 		}
 		
-		var entryID = "";
+		var deviceName = "";
 		function onCreateAction(){
 			$("#createAction").modal("show");
 			console.log(event.path);
-			entryID = event.path[2].id;
+			deviceName = event.path[2].id;
 		}
 		
 		function createAction(){
 			
-			var action = $("#createAction input#action").val();
+			var name = $("#createAction input#action").val();
 			var route = $("#createAction input#route").val();
 			var type = $("#createAction  input[type='radio']:checked").val();
-			console.log(entryID);
-			console.log(action);
+			console.log(deviceName);
+			console.log(name);
 			console.log(route);
 			console.log(type);
+			$.ajax({
+				url: "http://localhost:8088/api/v1/actions/",
+				method: "POST",
+				data: {
+						name,
+						type,
+						route,
+						deviceName						
+				},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
 		}
 		
 		function closeAction(){
@@ -178,10 +195,11 @@
 		
 
 
-</script>
 
+</script>
 </head>
 <body >
+
 
 	<header>
 		<% include ../partials/header %>
@@ -223,10 +241,7 @@
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
+
 </div>
-
-
-
-
 </body>
 </html>

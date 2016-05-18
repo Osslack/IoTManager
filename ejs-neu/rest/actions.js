@@ -5,15 +5,15 @@ const router = new Router;
 
 router.post('/', (req,res) => {
   // check the request
-  let userObject = req.body
+  let {name, type, route, deviceName} = req.body;
+  
+  let userObject = {name, type, route}
   // create device
   let owner = req.session.user.username;
   let action = new Action();
   action.userRepresentation = userObject;
-  action.owner = owner;
-  req.app.core.addAction(action)
+  req.app.core.addAction(action, deviceName, owner)
   .then( (device) => {
-    console.log(device)
     res.send(device.userRepresentation);
   })
   .catch( (e) => {

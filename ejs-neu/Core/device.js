@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { Action } from './action.js';
 
 class Device {
 
@@ -61,7 +62,7 @@ class Device {
 	}
 
 	addAction(action){
-		this._obj.actions.push(action);
+		this._obj.actions.push(action.userRepresentation);
 	}
 
 	get dbRepresentation() {
@@ -76,26 +77,23 @@ class Device {
     }
 
 	get userRepresentation() {
-		let actions = this.actions.map(
-			action => action.userRepresentation
-		);
 	  let result = {
 	      id: this.id,
 	      name: this.name,
 	      adress: this.adress,
 				port : this.port,
-				actions : actions,
+				actions : this.actions,
 				owner : this.owner
 	  };
 	  return result;
 	  }
 
 	  set userRepresentation(obj) {
-	      if (obj.id)     this.id = ObjectID(obj.id);
+	      if (obj.id)     this.id = ObjectId(obj.id);
 	      if (obj.name !== undefined)  this.name = obj.name;
 	      if (obj.adress !== undefined) this.adress = obj.adress;
 				if (obj.port !== undefined) this.port = obj.port;
-				if (actions)
+				if (obj.actions) this.actions = obj.actions;
 				if (obj.owner !== undefined) this.owner = obj.owner;
 	  }
 }

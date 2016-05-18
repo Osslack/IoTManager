@@ -23,7 +23,7 @@ router.post('/', (req,res) => {
 	})
 
 router.get('/', (req,res) => {
-  console.log(req);
+  console.log(req.session.user);
 	req.app.core.getDevices(req.session.user.username)
 		.then((devices) => {
 				res.send(devices);
@@ -35,10 +35,9 @@ router.get('/', (req,res) => {
 })
 
 router.delete('/', (req,res) => {
-	let {name, adress, port } = req.body;
+	let { name } = req.body;
 	let owner = req.session.user.username;
-	let device = new Device({name, adress, port, owner});
-	req.app.core.deleteDevice(device)
+	req.app.core.deleteDevice(name, owner)
 	.then(() => {
 		res.send('Deleted Device.');
 	})
