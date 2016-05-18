@@ -77,7 +77,7 @@
 			
 			
 
-			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" onclick="deleteGadget(event)"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
+			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button></div></div>';
 
 
 			if(count % 2 == 0){
@@ -148,6 +148,32 @@
 				}
 			});
 		}
+		
+		var entryID = "";
+		function onCreateAction(){
+			$("#createAction").modal("show");
+			console.log(event.path);
+			entryID = event.path[2].id;
+		}
+		
+		function createAction(){
+			
+			var action = $("#createAction input#action").val();
+			var route = $("#createAction input#route").val();
+			var type = $("#createAction  input[type='radio']:checked").val();
+			console.log(entryID);
+			console.log(action);
+			console.log(route);
+			console.log(type);
+		}
+		
+		function closeAction(){
+			$("#createAction").modal("hide");
+			$("#createAction input#action").val('');
+			$("#createAction input#route").val('');
+		}
+		
+		
 
 		
 
@@ -181,6 +207,7 @@
 					<span class="glyphicon glyphicon-plus" ></span>
 				</button>
 				<% include ../partials/create %>
+				<% include ../partials/createAction %>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
