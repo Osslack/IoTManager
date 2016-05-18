@@ -73,6 +73,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/logout" ,(req,res) =>{
+    console.log('Kappa')
     delete req.session.authenticated
     delete req.session.user;
     res.send('User succesfully logged out');
