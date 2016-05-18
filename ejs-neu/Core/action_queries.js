@@ -19,7 +19,17 @@ function addAction(action, deviceName, owner){
 }
 
 function runAction(actionName, deviceName, owner) {
-
+	this.db.collection.findOne({ "name" : deviceName, "owner" : owner})
+	.then(deviceDB => {
+		let device = new Device(deviceDB);
+		console.log(device);
+		let action = device.actions.find((action) => {
+			return action.name === actionName;
+		})
+		return action.run(device.adress, device.port);
+	})
 }
+
+module.exports.runAction = runAction;
 module.exports.initActionCollection = initActionCollection;
 module.exports.addAction = addAction;

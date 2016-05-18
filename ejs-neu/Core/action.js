@@ -43,9 +43,12 @@ class Action {
 	}
 
 	run(adress, port){
+		let url = adress + port + this._obj.route;
+		console.log(url);
 		switch(this._obj.type) {
     case 'GET':
-      //  code block
+		let url = adress + port + route;
+      request.get(url)
         break;
     case 'POST':
       //  code block
