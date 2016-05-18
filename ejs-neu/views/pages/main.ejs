@@ -12,12 +12,19 @@
 				method: "GET",
 				success: function(data){
 					console.log(data);
+					for(i = 0; i < data.length; i++){
+						var name = data[i].name;
+						var adress = data[i].adress;
+						var port = data[i].port;
+						createGadgetEntry(name, adress, port);
+					}
 				},
 				error: function(data){
 					console.log(data);
 				}
 			});
 		});
+		
 
 
 		function onCreateGadget(){
@@ -42,13 +49,15 @@
 					port
 				},
 				success: function(data){
-					console.log(data._obj._id);
+					
 					$("#createModal").modal("hide");
-					createGadgetEntry(name, adress, port);
+					
 					clearInput();
+					window.location="http://localhost:8088/";
 				},
 				error: function(data){
 					console.log(data);
+					$('#gadgetName').parent('div').addClass('has-error');
 				}
 			});
 
@@ -64,8 +73,9 @@
 		}
 		function createGadgetEntry(name, ip, port){
 
-			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" id='+name+'1'+'><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
-			
+			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" ><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
+			var test = "'"+name+"'";
+			var element = document.getElementById(test);
 
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
@@ -96,11 +106,7 @@
 			clearInput();
 		}
 
-		
-		$(document).click(function(event){
-			console.log(event.target.id);
-		});
-	
+
 		function onLogout(){
 			$.ajax({
 				url: "http://localhost:8088/api/v1/users/logout",
@@ -118,12 +124,7 @@
 		
 
 
-	
-
-
-
-
-	</script>
+</script>
 </head>
 <body >
 
@@ -133,7 +134,7 @@
 		<div class="container">
 		<div class="row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-8" id="test">
+			<div class="col-sm-8" id="colGadget">
 				
 				<div class="col-sm-6" id="col1">
 
