@@ -1,9 +1,15 @@
+<!-- 
+	The settings page. Password can be changed and account can be deleted.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="styleSheet" type="text/css" href="static/css/style.css" />
-    <% include ../partials/head %>
-	<script type="text/javascript">
+<% include ../partials/head %>
+
+<script type="text/javascript">
+
+			//function to save the changed Password
 			function savePassword(){
 				var password_old = $(" input#password").val();
 				var password_new = $(" input#newPW").val();
@@ -26,53 +32,55 @@
 					});
 				}
 				else{
+					// if the new passwords are incorrect show an error Modal
 					$('#passwordModalfail').modal('show');
 				}
-
-
 			}
+			
+			//handle user logout
 			function onLogout(){
-			$.ajax({
-				url: "http://localhost:8088/api/v1/users/logout",
-				method: "post",
-				data: {},
-				success: function(data){
-					console.log(data);
-					window.location="http://localhost:8088/";
-				},
-				error: function(data){
-					console.log(data);
-				}
-			});
+				$.ajax({
+					url: "http://localhost:8088/api/v1/users/logout",
+					method: "post",
+					data: {},
+					success: function(data){
+						console.log(data);
+						window.location="http://localhost:8088/";
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			//handle delete account.
+			function deleteAcc(){
+				$.ajax({
+					url: "http://localhost:8088/api/v1/users/",
+					method: "DELETE",
+					data: {},
+					success: function(){
+						onLogout();
+					},
+					error: function(){
+						window.alert("User konnte nicht gelöscht werden");
+					}
+				});
 			}
 
-		function deleteAcc(){
-			$.ajax({
-				url: "http://localhost:8088/api/v1/users/",
-				method: "DELETE",
-				data: {},
-				success: function(){
-					alert("user gelöscht");
-				},
-				error: function(){
-					window.alert("user konnte nicht gelöscht werden");
-				}
-			});
-		}
-
-	</script>
+</script>
 </head>
 <body >
-
 <header>
-				<% include ../partials/header %>
-
-
-			</header>
+	<% include ../partials/header %>
+</header>
+<!-- Use a container to style the page. -->
 <div class="container">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
+		
+		<!--Change Password Panel-->
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 				<h3 class="panel-title">Passwort ändern</h3>
@@ -80,34 +88,29 @@
 			  <div class="panel-body">
 				<form role="form">
 					<div class="form-group">
-
-								  <input type="password" class="form-control" id="password" placeholder="Aktuelles Passwort">
-								</div>
-								<div class="form-group">
-
-									<input type="password" class="form-control" id="newPW" placeholder="Neues Passwort">
-								</div>
-								<div class="form-group">
-
-									<input type="password" class="form-control" id="rePW" placeholder="Neues Passwort wiederholen">
-								</div>
-						</form>
-						<button type="button" class="btn btn-success btn-default pull-center" onclick="savePassword()"><span class="glyphicon glyphicon-save"></span> Speichern</button>
-
-
+						<input type="password" class="form-control" id="password" placeholder="Aktuelles Passwort">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="newPW" placeholder="Neues Passwort">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="rePW" placeholder="Neues Passwort wiederholen">
+					</div>
+				</form>
+				<button type="button" class="btn btn-success btn-default pull-center" onclick="savePassword()"><span class="glyphicon glyphicon-save"></span> Speichern</button>
 			  </div>
 			  </div>
 
-
+		<!--Delete Account Panel-->
 			<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">Account löschen</h3>
 			  </div>
 			  <div class="panel-body">
-				<button type="button" class="btn btn-success btn-danger btn-block" onclick="deleteAcc()">Account dauerhaft löschen</button>
+				<button type="button" class="btn btn-success btn-danger btn-block" onclick="deleteAcc()">Account unwiderruflich löschen</button>
 			  </div>
 			</div>
-
+	<!--Include the panels which are used on this page-->
 		<% include ../partials/password %>
 		<% include ../partials/pwfail %>
 
@@ -116,10 +119,8 @@
 
 	</div>
 </div>
-			<footer>
-				<% include ../partials/footer %>
-			</footer>
-
-
+<footer>
+	<% include ../partials/footer %>
+</footer>
 </body>
 </html>

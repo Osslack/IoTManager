@@ -1,53 +1,45 @@
-<!-- modal login -->
-			<div class="modal fade scrollen" id="createAction" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						
-						<div class="modal-header" style="padding:35px 50px;">
-							<button type="button" class="close" onclick="closeAction()">&times;</button>
-							<h4><span class="glyphicon glyphicon-home"></span> Action anlegen</h4>
-						</div>
-						
-						<div class="modal-body" style="padding:40px 50px;">
-							<form role="form">
-								<div class="form-group">
-								  <label for="Action"><span class="glyphicon glyphicon-cd"></span> Action</label>
-								  <input type="text" class="form-control" id="action" placeholder="Name der Action">
-								</div>
-								<div class="form-group">
-									<label for="type"><span class="glyphicon glyphicon-cloud"></span> Typ</label>
-									 
-									
-										<label class="radio-inline">
-										  <input type="radio" name="get" id="get" value="get">GET
-										</label>
-										<label class="radio-inline">
-										  <input type="radio" name="post" id="post" value="post">POST
-										</label>
-										<label class="radio-inline">
-										  <input type="radio" name="delete" id="delete" value="delete">DELETE
-										</label>
-									 
-								</div>
-								<div class="form-group">
-									<label for="route"><span class="glyphicon glyphicon-cloud"></span> Route</label>
-									<input type="text" class="form-control" id="route" placeholder="Route">
-								</div>								
-						</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-success btn-default pull-left" onclick="createAction(event)"><span class="glyphicon glyphicon-pencil"></span> Anlegen</button>
-								<button type="button" class="btn btn-danger btn-default pull-right" onclick="closeAction()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
+<!--
+	Modal to create an Action
+-->
+<div class="modal fade scrollen" id="createAction" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="padding:35px 50px;">
+				<button type="button" class="close" onclick="closeAction()">&times;</button>
+				<h4><span class="glyphicon glyphicon-home"></span> Action anlegen</h4>
 		</div>
-		<div class="col-sm-4"></div>
-	</div>	
+		<div class="modal-body" style="padding:40px 50px;">
+			<form role="form">
+				<div class="form-group">
+					<label for="Action"><span class="glyphicon glyphicon-cd"></span> Action</label>
+					 <input type="text" class="form-control" id="action" placeholder="Name der Action">
+				</div>
+				<div class="form-group">
+					<label for="type"><span class="glyphicon glyphicon-cloud"></span> Typ</label>
+						<label class="radio-inline">
+							<input type="radio" name="get" id="get" value="get">GET
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="post" id="post" value="post">POST
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="delete" id="delete" value="delete">DELETE
+						</label>
+				</div>
+				<div class="form-group">
+					<label for="route"><span class="glyphicon glyphicon-cloud"></span> Route</label>
+					<input type="text" class="form-control" id="route" placeholder="Route">
+				</div>							
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-success btn-default pull-left" onclick="createAction(event)"><span class="glyphicon glyphicon-pencil"></span> Anlegen</button>
+			<button type="button" class="btn btn-danger btn-default pull-right" onclick="closeAction()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+		</div>
+	</div>
 </div>
+
 
 
 

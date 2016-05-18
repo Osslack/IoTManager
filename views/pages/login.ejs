@@ -1,17 +1,21 @@
+<!--
+	Login Page. User can login with the username and password
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="styleSheet" type="text/css" href="static/css/style.css" />
-    <% include ../partials/head %>
-	<script type="text/javascript">
 
+<% include ../partials/head %>
+	<script type="text/javascript">
+		//do not show the navbar items.
 		$(document).ready(function(){
 			document.getElementById('myNavbar').style.visibility='hidden';
 			document.getElementById('navBrand').style.visibility='hidden';
 			document.getElementById('menubutton').style.display='none';
-
 		});
 
+		//handle login. Send the request to the server.
 		function onLogin() {
 			var data = $('#loginForm').serializeArray();
 			var username = data[0].value;
@@ -24,30 +28,22 @@
 					password
 				},
 				success: function(data){
-					console.log(data);
 					$('#user').parent('div').removeClass('has-error');
 					$('#password2').parent('div').removeClass('has-error');
 					window.location="http://localhost:8088/";
-
-					//GET METHOD zur Hauptseite
-
 				},
-
 				error: function(data){
-					console.log(data);
+					//mark input fields with red border to show something went wrong and user could not be logged in
 					$('#user').parent('div').addClass('has-error');
 					$('#password2').parent('div').addClass('has-error');
 				},
 			});
-
-
 		}
 
+		//switch to register-page to create an user
 		function onSwitchReg(){
 				window.location="http://localhost:8088/register";
 		}
-
-
 </script>
 </head>
 <body >
@@ -59,11 +55,15 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
+			
+			<!-- Login Panel -->
+			
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Login</h3>
 					  </div>
 					  <div class="panel-body">
+			<!-- Login form with input fields -->
 						<form role="form" id="loginForm" >
 							<div class="form-group">
 							  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Benutzername</label>
@@ -73,7 +73,7 @@
 								<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Passwort</label>
 								<input type="password" class="form-control" id="password2" name="password" placeholder="Passwort">
 							</div>
-							<!-- Login Cancel Button -->
+			<!-- Login Button -->
 							<button type="button" class="btn btn-success btn-md center-block" onclick="onLogin();"><span class="glyphicon glyphicon-log-in"></span> Login</button>
 
 						</form>
@@ -82,6 +82,7 @@
 						<div class="row">
 							<div class="col-sm-4"></div>
 							<div class="col-sm-4">
+			<!-- Switch to Register Page-->
 								<button type="submit" class="btn btn-default btn-block" data-dismiss="modal" id="register" onclick="onSwitchReg()"><span class="glyphicon glyphicon-pencil"></span> Registrieren</button>
 							</div>
 							<div class="col-sm-4"></div>

@@ -1,19 +1,24 @@
+<!--
+	The Main page. On this page an user can create and see the Gadgets. 
+	Furthermore actions for each gadget can be created and executed
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="styleSheet" type="text/css" href="static/css/style.css" />
-    <% include ../partials/head %>
+<% include ../partials/head %>
+<script type="text/javascript">
 
-
-	<script type="text/javascript">
-
+		var count = 0;
+		var deviceName = "";		
+		
+		//load all gadget and show them on the webpage.
 		$(document).ready(function(){
 			$.ajax({
 				url: "http://localhost:8088/api/v1/devices",
 				method: "GET",
 				success: function(data){
-					console.log(data.length);
-					console.log(data);
+					
+					// create a panel for each gadget
 					for(var i = 0; i < data.length; i++){
 						console.log(i);
 						console.log(data[i]);
@@ -22,7 +27,6 @@
 						var port = data[i].port;
 						var actions;
 						actions = data[i].actions;
-
 						createGadgetEntry(name, adress, port, actions);
 					}
 				},
@@ -33,71 +37,66 @@
 		});
 
 
-
+		//show modal that the user can type in the specifi data (name, ip, port) of an gadget
 		function onCreateGadget(){
 		$("#createModal").modal("show");
 		}
 
-		var count = 0;
-
-
+		//create a gadget. to do this get all data the user typed in an send it to the backend.
+		//The name of a gadget is unique.
 		function onGadgetEntry(){
-
 			var name = $("#createModal input#gadgetName").val();
 			var adress = $("#createModal input#ip").val();
 			var port = $("#createModal input#port").val();
 
 			if( name && adress && port){
-			$.ajax({
-				url: "http://localhost:8088/api/v1/devices",
-				method: "POST",
-				data: {
-					name,
-					adress,
-					port
-				},
-				success: function(data){
-					$("#createModal").modal("hide");
-
-					clearInput();
-					window.location="http://localhost:8088/";
-				},
-				error: function(data){
-					console.log(data);
-					$('#gadgetName').parent('div').addClass('has-error');
-				}
-			});
-
-
+				$.ajax({
+					url: "http://localhost:8088/api/v1/devices",
+					method: "POST",
+					data: {
+						name,
+						adress,
+						port
+					},
+					success: function(data){
+						$("#createModal").modal("hide");
+						clearInput();
+						window.location="http://localhost:8088/";
+					},
+					error: function(data){
+						console.log(data);
+						$('#gadgetName').parent('div').addClass('has-error');
+					}
+				});
 			}
 			else{
+				//mark error if an input fiel contains an empty string
 				$('#ip').parent('div').addClass('has-error');
 				$('#gadgetName').parent('div').addClass('has-error');
 				$('#port').parent('div').addClass('has-error');
 			}
-
-
 		}
 
-
+		//create Gadget and show it on the screen
 		function createGadgetEntry(name, ip, port,actions){
 			var button = '';
 			var begin = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div>';
 			var end = '</div></div>';
 			var footer = '<div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button>';
 			var panel;
-
+			
+			//if actions are defined, add them to the panel footer.
 			if(actions.length == 0){
 				panel = begin+footer+end;
 			}
 			else{
-			for(var a=0; a < actions.length; a++){
+				for(var a=0; a < actions.length; a++){
 					button += '<button class="btn btn-xs btn-success" onclick="runAction(event)" id='+actions[a].name+'>'+actions[a].name+'</button>'
 				}
 				panel = begin+footer+button+end;
-
 			}
 
+			//decide on which column the panel/gadget is shwon
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
 				count++;
@@ -106,10 +105,9 @@
 				$("#col2").prepend(panel);
 				count++;
 			}
-
 		}
 
-		// clears the user input. Placeholder (like "Benutzername") is shown in each input field.
+		// clears the user input. Placeholders are shown in each input field.
 		function clearInput(){
 			$("#createModal input#gadgetName").val('');
 			$("#createModal input#ip").val('');
@@ -123,12 +121,10 @@
 		// function which is executed, when the create Model is closed
 		function closeGadgetEntry(){
 			$("#createModal").modal("hide");
-
 			clearInput();
 		}
 
-
-
+		//Logout function the user can use to log off.
 		function onLogout(){
 			$.ajax({
 				url: "http://localhost:8088/api/v1/users/logout",
@@ -143,15 +139,15 @@
 				}
 			});
 		}
-
+		
+		//delete a gadget, which is never used
 		function deleteGadget(){
-
-			console.log(event.path[3].id);
+			//get the id of the gadget, which is stored in the panel
 			var name = event.path[3].id;
 			if(name == "col1" || name == "col2"){
 				name = event.path[2].id;
 			}
-			console.log(name);
+			//send the request to delete the gadget.
 			$.ajax({
 				url: "http://localhost:8088/api/v1/devices",
 				method: "DELETE",
@@ -167,22 +163,17 @@
 			});
 		}
 
-		var deviceName = "";
+		//create an action for a gadget and store the deviceName in the variable.
 		function onCreateAction(){
 			$("#createAction").modal("show");
-			console.log(event.path);
 			deviceName = event.path[2].id;
 		}
 
+		//Store the created action in the database.
 		function createAction(){
-
 			var name = $("#createAction input#action").val();
 			var route = $("#createAction input#route").val();
 			var type = $("#createAction  input[type='radio']:checked").val();
-			console.log(deviceName);
-			console.log(name);
-			console.log(route);
-			console.log(type);
 			$.ajax({
 				url: "http://localhost:8088/api/v1/actions/",
 				method: "POST",
@@ -202,15 +193,16 @@
 			});
 		}
 
+		//close the modal to create an action an delte the input of the input fields
 		function closeAction(){
 			$("#createAction").modal("hide");
 			$("#createAction input#action").val('');
 			$("#createAction input#route").val('');
 		}
 
+		//execute an action
 		function runAction(){
-			console.log(event.path[0].id);
-			console.log(event.path[2].id);
+			//get the device and the action name
 			var actionName = event.path[0].id;
 			var deviceName = event.path[2].id;
 			$.ajax({
@@ -228,41 +220,29 @@
 				}
 			});
 		}
-
-
-
-
-
-
-
 </script>
 </head>
 <body >
-
-
-	<header>
-		<% include ../partials/header %>
-	</header>
+<header>
+	<% include ../partials/header %>
+</header>
+<!-- Use a container to style the page-->
 		<div class="container">
 		<div class="row">
 			<div class="col-sm-2"></div>
-
 			<div class="col-sm-8" id="colGadget">
-
-
-
-
-				<div class="col-sm-6" id="col1">
-
-				</div>
-				<div class="col-sm-6" id="col2">
-
-				</div>
-				</main>
-				<!-- Include Modal create. It is activated by clicking the '+' Button in the buttom right corner -->
+			<!--The following 2 columns are used to show the gadgets.
+				It depends on the counter on which column a gadget is displayed.
+			-->
+				<div class="col-sm-6" id="col1"></div>
+				<div class="col-sm-6" id="col2"></div>
+				
+				<!-- Button which opens a modal to crate a new gadget-->
 				<button type="button" class="fixedbutton btn btn-primary" onclick="onCreateGadget()" id="createBtn">
 					<span class="glyphicon glyphicon-plus" ></span>
 				</button>
+				<!-- Include all partials which are used in this view -->
+				
 				<% include ../partials/create %>
 				<% include ../partials/createAction %>
 				<% include ../partials/request %>
@@ -271,18 +251,12 @@
 			<div class="col-sm-1"></div>
 		</div>
 		</div>
-
-			<footer >
-				<% include ../partials/footer %>
-			</footer>
-
-
-
-
+		<footer >
+			<% include ../partials/footer %>
+		</footer>
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
-
 </div>
 </body>
 </html>

@@ -1,42 +1,38 @@
-<!-- modal login -->
-			<div class="modal fade scrollen" id="createModal" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						
-						<div class="modal-header" style="padding:35px 50px;">
-							<button type="button" class="close" onclick="closeGadgetEntry()">&times;</button>
-							<h4><span class="glyphicon glyphicon-home"></span> Gerät anlegen</h4>
-						</div>
-						
-						<div class="modal-body" style="padding:40px 50px;">
-							<form role="form">
-								<div class="form-group">
-								  <label for="gadget"><span class="glyphicon glyphicon-cd"></span> Gerätename</label>
-								  <input type="text" class="form-control" id="gadgetName" placeholder="Gerätename">
-								</div>
-								<div class="form-group">
-									<label for="ip"><span class="glyphicon glyphicon-cloud"></span> IP-Adresse</label>
-									<input type="text" class="form-control" id="ip" placeholder="IP-Adresse">
-								</div>
-								<div class="form-group">
-									<label for="port"><span class="glyphicon glyphicon-cloud"></span> Port</label>
-									<input type="text" class="form-control" id="port" placeholder="Port">
-								</div>								
-						</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-success btn-default pull-left" onclick="onGadgetEntry()"><span class="glyphicon glyphicon-pencil"></span> Anlegen</button>
-								<button type="button" class="btn btn-danger btn-default pull-right" onclick="closeGadgetEntry()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						</div>
-					</div>
-				</div>
+<!-- 
+	Modal to create a Gadget.
+-->
+<div class="modal fade scrollen" id="createModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="padding:35px 50px;">
+				<button type="button" class="close" onclick="closeGadgetEntry()">&times;</button>
+				<h4><span class="glyphicon glyphicon-home"></span> Gerät anlegen</h4>
 			</div>
-
+			<div class="modal-body" style="padding:40px 50px;">
+				<form role="form">
+					<div class="form-group">
+						<label for="gadget"><span class="glyphicon glyphicon-cd"></span> Gerätename</label>
+						<input type="text" class="form-control" id="gadgetName" placeholder="Gerätename">
+					</div>
+					<div class="form-group">
+						<label for="ip"><span class="glyphicon glyphicon-cloud"></span> IP-Adresse</label>
+						<input type="text" class="form-control" id="ip" placeholder="IP-Adresse">
+					</div>
+					<div class="form-group">
+						<label for="port"><span class="glyphicon glyphicon-cloud"></span> Port</label>
+						<input type="text" class="form-control" id="port" placeholder="Port">
+					</div>								
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success btn-default pull-left" onclick="onGadgetEntry()"><span class="glyphicon glyphicon-pencil"></span> Anlegen</button>
+				<button type="button" class="btn btn-danger btn-default pull-right" onclick="closeGadgetEntry()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+			</div>
 		</div>
-		<div class="col-sm-4"></div>
-	</div>	
+	</div>
 </div>
+
 
 
 
