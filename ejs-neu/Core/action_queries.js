@@ -1,4 +1,6 @@
 import { Action } from './action.js';
+import { Device } from './device.js';
+import { Device_Queries } from './device_queries.js'
 
 
 function initActionCollection( ){
@@ -7,10 +9,17 @@ function initActionCollection( ){
 };
 
 function addAction(action){
-  console.log(action);
-  return this.db.collection("actions").insertOne(action)
-  .then(cursor => {
-          return new Action(cursor.ops[0])
+	console.log(action);
+	let data = action.dbRepresentation;
+	console.log(data);
+  return this.db.collection("devices").findOne({ "name" : data.deviceName, "owner" : data.owner})
+  .then(deviceDB => {
+		console.log(deviceDB);
+          let device = new Device(deviceDB);
+					console.log(device);
+					device.addAction(action);
+					console.log(device);
+					return this.updateDevice(device.userRepresentation);
       });
 }
 

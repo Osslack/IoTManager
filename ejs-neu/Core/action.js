@@ -31,7 +31,7 @@ class Action {
 	}
 
 	set type(value){
-		this._obj.adress = type;
+		this._obj.type = value;
 	}
 
 	//The Port the device is listening on
@@ -60,6 +60,8 @@ class Action {
 		this._obj.owner = value;
 	}
 
+
+
 	get dbRepresentation() {
 
         // assemble the object for the database.
@@ -70,6 +72,26 @@ class Action {
         // return
         return dbObj;
     }
+		get userRepresentation() {
+					let result = {
+							id: this.id,
+							name: this.name,
+							type: this.type,
+							route : this.route,
+							deviceName : this.deviceName,
+							owner : this.owner
+					};
+					return result;
+			}
+
+			set userRepresentation(obj) {
+					if (obj.id)     this.id = ObjectID(obj.id);
+					if (obj.name !== undefined)  this.name = obj.name;
+					if (obj.type !== undefined) this.type = obj.type;
+					if (obj.route !== undefined) this.route = obj.route;
+					if (obj.deviceName !== undefined) this.deviceName = obj.deviceName;
+					if (obj.owner !== undefined) this.owner = obj.owner;
+			}
 
 }
 

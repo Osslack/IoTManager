@@ -4,14 +4,17 @@ import { Action } from '../Core/action.js';
 const router = new Router;
 
 router.post('/', (req,res) => {
-  let action = new Action(req.body);
-  console.log(action);
-  console.log(req.body);
-  //let {name, type, route, deviceID} = req.body;
+  // check the request
+  let userObject = req.body
+  // create device
+  let owner = req.session.user.username;
+  let action = new Action();
+  action.userRepresentation = userObject;
+  action.owner = owner;
   req.app.core.addAction(action)
-  .then( (action) => {
-    console.log(action)
-    res.send(action);
+  .then( (device) => {
+    console.log(device)
+    res.send(device.userRepresentation);
   })
   .catch( (e) => {
     console.error(e);

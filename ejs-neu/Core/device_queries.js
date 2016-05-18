@@ -28,6 +28,22 @@ function deleteDevice(device){
 	return this.db.collection("devices").remove(device);
 }
 
+function updateDevice(device){
+    let data = device.dbRepresentation;
+    let id = device.id;
+    delete data._id;
+
+    //  $set specifies the data to change, fields not supplied in data will not be changed
+    return this.db.collection("entries").findAndModify(
+        {_id: id}, [], {"$set": data}, {"new": true}
+    ).then(cursor => {
+        let newData = cursor.value;
+        let newDevice = new Device(newData);
+        return newDevice;
+    });
+}
+
+module.exports.updateDevice = updateDevice;
 module.exports.deleteDevice = deleteDevice;
 module.exports.getDevices = getDevices;
 module.exports.createDevice = createDevice;
