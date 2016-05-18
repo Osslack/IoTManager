@@ -8,18 +8,13 @@ function initActionCollection( ){
 	console.log("Created Unique Key");
 };
 
-function addAction(action){
-	console.log(action);
+function addAction(action, deviceName, owner){
 	let data = action.dbRepresentation;
-	console.log(data);
-  return this.db.collection("devices").findOne({ "name" : data.deviceName, "owner" : data.owner})
+  return this.db.collection("devices").findOne({ "name" : deviceName, "owner" : owner})
   .then(deviceDB => {
-		console.log(deviceDB);
           let device = new Device(deviceDB);
-					console.log(device);
 					device.addAction(action);
-					console.log(device);
-					return this.updateDevice(device.userRepresentation);
+					return this.updateDevice(device);
       });
 }
 

@@ -23,9 +23,10 @@ router.post('/', (req,res) => {
 	})
 
 router.get('/', (req,res) => {
-  console.log(req);
+  console.log(req.session.user);
 	req.app.core.getDevices(req.session.user.username)
 		.then((devices) => {
+      console.log(devices);
 				res.send(devices);
 		})
 		.catch((e) => {

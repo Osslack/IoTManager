@@ -91,11 +91,32 @@ class Device {
 	  }
 
 	  set userRepresentation(obj) {
-	      if (obj.id)     this.id = ObjectID(obj.id);
+			console.log('userRepresentation');
+			console.log(obj)
+	      if (obj.id)     this.id = ObjectId(obj.id);
 	      if (obj.name !== undefined)  this.name = obj.name;
 	      if (obj.adress !== undefined) this.adress = obj.adress;
 				if (obj.port !== undefined) this.port = obj.port;
-				if (actions)
+				if (obj.actions){
+            let actions = this.actions;
+            let newActions = [];
+            for (let action of obj.actions) {
+                let oldAction = actions.find(element => element.id == action.id);
+                let actionToAdd;
+                if (oldAction) {
+                    oldAction.userRepresentation = action;
+                    actionToAdd = oldAction;
+                } else {
+										console.log(action);
+                    let type = action.type;
+                    actionToAdd = new Action();
+										actionToAdd.type = type;
+                    actionToAdd.userRepresentation = action;
+                }
+                newActions.push(actionToAdd);
+            }
+            this.actions = newActions;
+        }
 				if (obj.owner !== undefined) this.owner = obj.owner;
 	  }
 }
