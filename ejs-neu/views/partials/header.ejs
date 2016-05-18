@@ -1,18 +1,21 @@
 <link rel="stylesheet" type="text/css" href="static/css/style.css" />
 <script type="text/javascript">
-function onLogOut(){
+function onLogout(){
+		console.log("test");
 	$.ajax({
 		url: "http://localhost:8088/api/v1/users/logout",
 		method: "POST",
-		data : {}
-	}
+		data: {},
 		success: function(data){
+			console.log(data);
 			window.location="http://localhost:8088/";
 		},
 		error: function(data){
 			console.log(data);
-		})
-	};
+			window.location="http://localhost:8088/";
+		}
+	});
+}
 </script>
 
 <!-- Images above the menu bar. Disappears by scrolling -->
@@ -32,17 +35,17 @@ function onLogOut(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" id="navBrand" href="/main">IoT Manager</a>
+      <a class="navbar-brand" id="navBrand" href="/devices">IoT Manager</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="/main">Geräte</a>
+        <li><a href="/devices">Geräte</a>
 
         </li>
         <li><a href="/wflow">Workflow</a></li>
 		</ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/"><span class="glyphicon glyphicon-log-out" onclick="onLogout();"></span> Logout</a></li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-out" onclick="onLogout()"></span> Logout</a></li>
       </ul>
     </div>
   </div>
