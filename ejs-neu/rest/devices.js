@@ -36,10 +36,9 @@ router.get('/', (req,res) => {
 })
 
 router.delete('/', (req,res) => {
-	let {name, adress, port } = req.body;
+	let { name } = req.body;
 	let owner = req.session.user.username;
-	let device = new Device({name, adress, port, owner});
-	req.app.core.deleteDevice(device)
+	req.app.core.deleteDevice(name, owner)
 	.then(() => {
 		res.send('Deleted Device.');
 	})

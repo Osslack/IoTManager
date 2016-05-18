@@ -6,18 +6,24 @@
 
 	<script type="text/javascript">
 
-		$(document).ready(function(){
-			$.ajax({
-				url: "http://localhost:8088/api/v1/devices",
-				method: "GET",
-				success: function(data){
-					console.log(data);
-				},
-				error: function(data){
-					console.log(data);
-				}
+	$(document).ready(function(){
+					$.ajax({
+							url: "http://localhost:8088/api/v1/devices",
+							method: "GET",
+							success: function(data){
+									console.log(data);
+									for(i = 0; i < data.length; i++){
+											var name = data[i].name;
+											var adress = data[i].adress;
+											var port = data[i].port;
+											createGadgetEntry(name, adress, port);
+									}
+							},
+							error: function(data){
+									console.log(data);
+							}
+					});
 			});
-		});
 
 
 		function onCreateGadget(){
@@ -114,7 +120,7 @@
 				}
 			});
 		}
-	
+
 	</script>
 </head>
 <body >

@@ -25,8 +25,8 @@ function getDevices(username){
 	})
 	return result;
 }
-function deleteDevice(device){
-	return this.db.collection("devices").remove(device);
+function deleteDevice(name, owner){
+	return this.db.collection("devices").remove({ "name" : name, "owner" : owner});
 }
 
 function updateDevice(device){
