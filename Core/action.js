@@ -46,36 +46,40 @@ class Action {
 		let url = 'http://' + adress + ':' + port + this._obj.route;
 		let status = 500;
 		console.log(url);
+		console.log(this._obj.type);
 		switch(this._obj.type) {
-    case 'GET':
+    case 'get':
+		console.log("hier");
       request.get(url)
 			.on('response', function(response) {
-			    status = response.statusCode
+				console.log(response)
+			    return status = response.statusCode
 			  })
 			.on('error', function(err) {
-    			status = 500;
+    			return status = 500;
   			})
         break;
-    case 'POST':
+    case 'post':
 			request.post(url)
 			.on('response', function(response) {
-			    status = response.statusCode
+				console.log(response)
+			    return status = response.statusCode
 			  })
 			.on('error', function(err) {
-    			status = 500;
+    			return status = 500;
   			})
         break;
-    case 'DELETE':
+    case 'delete':
 			request.delete(url)
 			.on('response', function(response) {
-			    status = response.statusCode
+				console.log(response)
+			    return status = response.statusCode
 			  })
 			.on('error', function(err) {
-    			status = 500;
+    			return status = 500;
   			})
 				break;
 			}
-		return status;
 	}
 
 

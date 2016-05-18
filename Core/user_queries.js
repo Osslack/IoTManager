@@ -17,7 +17,10 @@ function updateUser(username, password_new){
 }
 
 function deleteUser(username){
-	return this.db.collection("users").remove({"username":username});
+	return this.db.collection("users").remove({"username":username})
+          .then(() => {
+            this.db.collection("devices").remove({"owner" : username})
+          });
 }
 
 function authUser(username, password){

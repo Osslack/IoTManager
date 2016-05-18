@@ -4,6 +4,7 @@ var app = express();
 let router = new express.Router();
 
 router.get('/', (req,res) => {
+  console.log("test");
   res.send('Test');
 })
 
@@ -19,4 +20,5 @@ router.post('/', (req,res) => {
 
 app.use('', router);
 app.listen(1337);
+console.log("App running on port 1337")
 module.exports = app;
