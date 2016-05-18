@@ -5,7 +5,8 @@ const router = new Router;
 
 router.post('/', (req,res) => {
   // check the request
-  let {name, type, route, deviceName} = req.body
+  let {name, type, route, deviceName} = req.body;
+  
   let userObject = {name, type, route}
   // create device
   let owner = req.session.user.username;

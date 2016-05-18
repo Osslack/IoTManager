@@ -3,159 +3,245 @@
 <head>
     <link rel="styleSheet" type="text/css" href="static/css/style.css" />
     <% include ../partials/head %>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $.ajax({
-                url: "http://localhost:8088/api/v1/devices",
-                method: "GET",
-                success: function(data){
-                    console.log(data);
-                    for(i = 0; i < data.length; i++){
-                        var name = data[i].name;
-                        var adress = data[i].adress;
-                        var port = data[i].port;
-                        createGadgetEntry(name, adress, port);
-                    }
-                },
-                error: function(data){
-                    console.log(data);
-                }
-            });
-        });
+<<<<<<< HEAD
 
-        function onCreateGadget(){
-        $("#createModal").modal("show");
-        }
-        var count = 0;
+	<script type="text/javascript">
 
-        function onGadgetEntry(){
-            var name = $("#createModal input#gadgetName").val();
-            var adress = $("#createModal input#ip").val();
-            var port = $("#createModal input#port").val();
-            if( name && adress && port){
-            $.ajax({
-                url: "http://localhost:8088/api/v1/devices",
-                method: "POST",
-                data: {
-                    name,
-                    adress,
-                    port
-                },
-                success: function(data){
-                    $("#createModal").modal("hide");
-
-                    clearInput();
-                    window.location="http://localhost:8088/";
-                },
-                error: function(data){
-                    console.log(data);
-                    $('#gadgetName').parent('div').addClass('has-error');
-                }
-            });
-            }
-            else{
-                $('#ip').parent('div').addClass('has-error');
-                $('#gadgetName').parent('div').addClass('has-error');
-                $('#port').parent('div').addClass('has-error');
-            }
-        }
-        function createGadgetEntry(name, ip, port){
+		$(document).ready(function(){
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "GET",
+				success: function(data){
+					console.log(data);
+					for(i = 0; i < data.length; i++){
+						var name = data[i].name;
+						var adress = data[i].adress;
+						var port = data[i].port;
+						createGadgetEntry(name, adress, port);
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		});
+		
 
 
-            var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" onclick="deleteGadget(event)"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
-            if(count % 2 == 0){
-                $("#col1").prepend(panel);
-                count++;
-            }
-            else{
-                $("#col2").prepend(panel);
-                count++;
-            }
-        }
-        // clears the user input. Placeholder (like "Benutzername") is shown in each input field.
-        function clearInput(){
-            $("#createModal input#gadgetName").val('');
-            $("#createModal input#ip").val('');
-            $("#createModal input#port").val('');
-            $("#createModal input").first().focus();
-            $('#ip').parent('div').removeClass('has-error');
-            $('#gadgetName').parent('div').removeClass('has-error');
-            $('#port').parent('div').removeClass('has-error');
-        }
-        // function which is executed, when the create Model is closed
-        function closeGadgetEntry(){
-            $("#createModal").modal("hide");
-            clearInput();
-        }
-        function onLogout(){
-            $.ajax({
-                url: "http://localhost:8088/api/v1/users/logout",
-                method: "post",
-                data: {},
-                success: function(data){
-                    console.log(data);
-                    window.location="http://localhost:8088/";
-                },
-                error: function(data){
-                    console.log(data);
-                }
-            });
-        }
+		function onCreateGadget(){
+		$("#createModal").modal("show");
+		}
 
-        function deleteGadget(){
+		var count = 0;
+		
 
-            console.log(event.path[3].id);
-            var name = event.path[3].id;
-            if(name == "col1" || name == "col2"){
-                name = event.path[2].id;
-            }
-            console.log(name);
-            $.ajax({
-                url: "http://localhost:8088/api/v1/devices",
-                method: "DELETE",
-                data: {
-                    name
-                },
-                success: function(data){
-                    window.location="http://localhost:8088/";
-                },
-                error: function(data){
-                    alert(data);
-                }
-            });
-        }
+		function onGadgetEntry(){
+
+			var name = $("#createModal input#gadgetName").val();
+			var adress = $("#createModal input#ip").val();
+			var port = $("#createModal input#port").val();
+
+			if( name && adress && port){
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "POST",
+				data: {
+					name,
+					adress,
+					port
+				},
+				success: function(data){
+					$("#createModal").modal("hide");
+					
+					clearInput();
+					window.location="http://localhost:8088/";
+				},
+				error: function(data){
+					console.log(data);
+					$('#gadgetName').parent('div').addClass('has-error');
+				}
+			});
+
+
+			}
+			else{
+				$('#ip').parent('div').addClass('has-error');
+				$('#gadgetName').parent('div').addClass('has-error');
+				$('#port').parent('div').addClass('has-error');
+			}
+
+
+		}
+		function createGadgetEntry(name, ip, port){
+
+
+			
+			
+
+			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button></div></div>';
+
+
+			if(count % 2 == 0){
+				$("#col1").prepend(panel);
+				count++;
+			}
+			else{
+				$("#col2").prepend(panel);
+				count++;
+			}
+
+		}
+
+		// clears the user input. Placeholder (like "Benutzername") is shown in each input field.
+		function clearInput(){
+			$("#createModal input#gadgetName").val('');
+			$("#createModal input#ip").val('');
+			$("#createModal input#port").val('');
+			$("#createModal input").first().focus();
+			$('#ip').parent('div').removeClass('has-error');
+			$('#gadgetName').parent('div').removeClass('has-error');
+			$('#port').parent('div').removeClass('has-error');
+		}
+
+		// function which is executed, when the create Model is closed
+		function closeGadgetEntry(){
+			$("#createModal").modal("hide");
+
+			clearInput();
+		}
+
+
+
+		function onLogout(){
+			$.ajax({
+				url: "http://localhost:8088/api/v1/users/logout",
+				method: "post",
+				data: {},
+				success: function(data){
+					console.log(data);
+					window.location="http://localhost:8088/";
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function deleteGadget(){
+			
+			console.log(event.path[3].id);
+			var name = event.path[3].id;
+			if(name == "col1" || name == "col2"){
+				name = event.path[2].id;
+			}
+			console.log(name);
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "DELETE",
+				data: {
+					name
+				},
+				success: function(data){
+					window.location="http://localhost:8088/";
+				},
+				error: function(data){
+					alert(data);
+				}
+			});
+		}
+		
+		var deviceName = "";
+		function onCreateAction(){
+			$("#createAction").modal("show");
+			console.log(event.path);
+			deviceName = event.path[2].id;
+		}
+		
+		function createAction(){
+			
+			var name = $("#createAction input#action").val();
+			var route = $("#createAction input#route").val();
+			var type = $("#createAction  input[type='radio']:checked").val();
+			console.log(deviceName);
+			console.log(name);
+			console.log(route);
+			console.log(type);
+			$.ajax({
+				url: "http://localhost:8088/api/v1/actions/",
+				method: "POST",
+				data: {
+						name,
+						type,
+						route,
+						deviceName						
+				},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function closeAction(){
+			$("#createAction").modal("hide");
+			$("#createAction input#action").val('');
+			$("#createAction input#route").val('');
+		}
+		
+		
+
+		
+
+
 
 </script>
 </head>
 <body >
-    <header>
-        <% include ../partials/header %>
-    </header>
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8" id="colGadget">
 
-                <div class="col-sm-6" id="col1">
-                </div>
-                <div class="col-sm-6" id="col2">
-                </div>
-                </main>
-                <!-- Include Modal create. It is activated by clicking the '+' Button in the buttom right corner -->
-                <button type="button" class="fixedbutton btn btn-primary" onclick="onCreateGadget()" id="createBtn">
-                    <span class="glyphicon glyphicon-plus" ></span>
-                </button>
-                <% include ../partials/create %>
-            </div>
-            <div class="col-sm-1"></div>
-        </div>
-        </div>
-            <footer >
-                <% include ../partials/footer %>
-            </footer>
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+		<div class="container">
+		<div class="row">
+			<div class="col-sm-2"></div>
+
+			<div class="col-sm-8" id="colGadget">
+				
+
+
+
+				<div class="col-sm-6" id="col1">
+
+				</div>
+				<div class="col-sm-6" id="col2">
+
+				</div>
+				</main>
+				<!-- Include Modal create. It is activated by clicking the '+' Button in the buttom right corner -->
+				<button type="button" class="fixedbutton btn btn-primary" onclick="onCreateGadget()" id="createBtn">
+					<span class="glyphicon glyphicon-plus" ></span>
+				</button>
+				<% include ../partials/create %>
+				<% include ../partials/createAction %>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+		</div>
+
+			<footer >
+				<% include ../partials/footer %>
+			</footer>
+
+
+
+
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+
 </div>
 </body>
 </html>
