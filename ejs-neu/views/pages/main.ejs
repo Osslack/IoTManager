@@ -4,7 +4,6 @@
     <link rel="styleSheet" type="text/css" href="static/css/style.css" />
     <% include ../partials/head %>
 
-
 	<script type="text/javascript">
 
 		$(document).ready(function(){
@@ -12,18 +11,12 @@
 				url: "http://localhost:8088/api/v1/devices",
 				method: "GET",
 				success: function(data){
-					console.log(data.length);
 					console.log(data);
-					for(var i = 0; i < data.length; i++){
-						console.log(i);
-						console.log(data[i]);
+					for(i = 0; i < data.length; i++){
 						var name = data[i].name;
 						var adress = data[i].adress;
 						var port = data[i].port;
-						var actions;
-						actions = data[i].actions;
-						
-						createGadgetEntry(name, adress, port, actions);
+						createGadgetEntry(name, adress, port);
 					}
 				},
 				error: function(data){
@@ -31,7 +24,7 @@
 				}
 			});
 		});
-		
+
 
 
 		function onCreateGadget(){
@@ -39,7 +32,7 @@
 		}
 
 		var count = 0;
-		
+
 
 		function onGadgetEntry(){
 
@@ -58,7 +51,7 @@
 				},
 				success: function(data){
 					$("#createModal").modal("hide");
-					
+
 					clearInput();
 					window.location="http://localhost:8088/";
 				},
@@ -78,26 +71,15 @@
 
 
 		}
-		
-		
-		function createGadgetEntry(name, ip, port,actions){
-			var button = '';			
-			var begin = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div>';
-			var end = '</div></div>';
-			var footer = '<div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button>';
-			var panel;
-			
-			if(actions.length == 0){
-				panel = begin+footer+end;
-			}
-			else{
-			for(var a=0; a < actions.length; a++){
-					button += '<button class="btn btn-xs btn-success" onclick="runAction(event)" id='+actions[a].name+'>'+actions[a].name+'</button>'
-				}
-				panel = begin+footer+button+end;
-				
-			}
-			
+		function createGadgetEntry(name, ip, port){
+
+
+
+
+
+			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right glyphicon glyphicon-remove" onclick="deleteGadget(event)"></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-right glyphicon glyphicon-plus" onclick="onCreateAction(event)"></button></div></div>';
+
+
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
 				count++;
@@ -143,9 +125,9 @@
 				}
 			});
 		}
-		
+
 		function deleteGadget(){
-			
+
 			console.log(event.path[3].id);
 			var name = event.path[3].id;
 			if(name == "col1" || name == "col2"){
@@ -166,16 +148,16 @@
 				}
 			});
 		}
-		
+
 		var deviceName = "";
 		function onCreateAction(){
 			$("#createAction").modal("show");
 			console.log(event.path);
 			deviceName = event.path[2].id;
 		}
-		
+
 		function createAction(){
-			
+
 			var name = $("#createAction input#action").val();
 			var route = $("#createAction input#route").val();
 			var type = $("#createAction  input[type='radio']:checked").val();
@@ -190,55 +172,44 @@
 						name,
 						type,
 						route,
-						deviceName						
+						deviceName
 				},
 				success: function(data){
 					console.log(data);
-					window.location="http://localhost:8088/";
 				},
 				error: function(data){
 					console.log(data);
 				}
 			});
 		}
-		
+
 		function closeAction(){
 			$("#createAction").modal("hide");
 			$("#createAction input#action").val('');
 			$("#createAction input#route").val('');
 		}
-		
-		function runAction(){
-			console.log(event.path[0].id);
-			console.log(event.path[2].id);
-			var actionName = event.path[0].id;
-			var deviceName = event.path[2].id;
-			$.ajax({
-				url: "http://localhost:8088/api/v1/actions/run/",
-				method: "POST",
-				data: {
-					actionName,
-					deviceName
-				},
-				success: function(){
-					$("#runRequest").modal("show");
-				},
-				error: function(){
-					$("#requestFail").modal("show");
-				}
-			});
-		}
-		
-		
 
-		
-
-
-
+    function runAction(){
+            var actionName = event.path[0].id;
+            var deviceName = event.path[2].id;
+            $.ajax({
+                url: "http://localhost:8088/api/v1/actions/run/",
+                method: "POST",
+                data: {
+                    actionName,
+                    deviceName
+                },
+                success: function(){
+                    $("#runRequest").modal("show");
+                },
+                error: function(){
+                    $("#requestFail").modal("show");
+                }
+            });
+        }
 </script>
 </head>
 <body >
-
 
 	<header>
 		<% include ../partials/header %>
@@ -248,7 +219,7 @@
 			<div class="col-sm-2"></div>
 
 			<div class="col-sm-8" id="colGadget">
-				
+
 
 
 
@@ -265,8 +236,6 @@
 				</button>
 				<% include ../partials/create %>
 				<% include ../partials/createAction %>
-				<% include ../partials/request %>
-				<% include ../partials/requestFail %>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>

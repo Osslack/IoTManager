@@ -30,7 +30,6 @@ function createCore() {
 			var core = new Core(db);
 			core.initUserCollection();
 			core.initDeviceCollection();
-			core.initActionCollection();
 			return core;
 		})
 		.catch( (e) => {

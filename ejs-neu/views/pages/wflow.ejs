@@ -8,7 +8,7 @@
 				var password_old = $(" input#password").val();
 				var password_new = $(" input#newPW").val();
 				var password_re = $(" input#rePW").val();
-				
+
 				if( password_new === password_re){
 					$.ajax({
 						url: "http://localhost:8088/api/v1/users/",
@@ -28,8 +28,8 @@
 				else{
 					$('#passwordModalfail').modal('show');
 				}
-				
-				
+
+
 			}
 			function onLogout(){
 			$.ajax({
@@ -45,7 +45,7 @@
 				}
 			});
 			}
-		
+
 		function deleteAcc(){
 			$.ajax({
 				url: "http://localhost:8088/api/v1/users/",
@@ -59,15 +59,15 @@
 				}
 			});
 		}
-		
+
 	</script>
 </head>
 <body >
 
 <header>
 				<% include ../partials/header %>
-				
-				
+
+
 			</header>
 <div class="container">
 	<div class="row">
@@ -80,25 +80,25 @@
 			  <div class="panel-body">
 				<form role="form">
 					<div class="form-group">
-								  
+
 								  <input type="password" class="form-control" id="password" placeholder="Aktuelles Passwort">
 								</div>
 								<div class="form-group">
-									
+
 									<input type="password" class="form-control" id="newPW" placeholder="Neues Passwort">
 								</div>
 								<div class="form-group">
-									
+
 									<input type="password" class="form-control" id="rePW" placeholder="Neues Passwort wiederholen">
-								</div>								
+								</div>
 						</form>
 						<button type="button" class="btn btn-success btn-default pull-center" onclick="savePassword()"><span class="glyphicon glyphicon-save"></span> Speichern</button>
-				
-				
+
+
 			  </div>
 			  </div>
-			  
-			  
+
+
 			<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">Account löschen</h3>
@@ -110,16 +110,16 @@
 
 		<% include ../partials/password %>
 		<% include ../partials/pwfail %>
-			
+
 		</div>
 		<div class="col-sm-3"></div>
-		
+
 	</div>
 </div>
 			<footer>
 				<% include ../partials/footer %>
 			</footer>
-		
-    
+
+
 </body>
 </html>

@@ -34,8 +34,8 @@ router.get('/register', function(req,res) {
 });
 
 // workflow page
-router.get('/wflow',auth, function(req, res) {
-	res.render('pages/wflow');
+router.get('/settings',auth, function(req, res) {
+	res.render('pages/settings');
 });
 
 
