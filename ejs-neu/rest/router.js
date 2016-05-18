@@ -9,6 +9,7 @@ var devices = require('./devices.js');
 
 const router = new express.Router();
 const MongoStore = connect(session);
+const router2 = new express.Router();
 
 function setUp(app){
 	router.use(session({
@@ -21,15 +22,17 @@ function setUp(app){
 	 // auth
     var auth = users.authenticate;
 
-	// add the routes
-	router.use('/actions', auth, actions);
-	router.use('/users', users);
-	router.use('/devices', auth, devices);
-	app.use('/', views);
+		// add the router to the app
+		var apiBaseUrl = '/api/v1';
 
-	// add the router to the app
-	var apiBaseUrl = '/api/v1';
-	app.use(apiBaseUrl, router);
+	// add the routes
+	router.use(apiBaseUrl + '/actions', auth, actions);
+	router.use(apiBaseUrl + '/users', users);
+	router.use(apiBaseUrl + '/devices', auth, devices);
+	router.use('/', views);
+
+
+	app.use(router);
 
 
 

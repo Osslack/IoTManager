@@ -4,14 +4,14 @@
 	<link rel="styleSheet" type="text/css" href="static/css/style.css" />
     <% include ../partials/head %>
 	<script type="text/javascript">
-	
-		$(document).ready(function(){  
+
+		$(document).ready(function(){
 			document.getElementById('myNavbar').style.visibility='hidden';
 			document.getElementById('navBrand').style.visibility='hidden';
 			document.getElementById('menubutton').style.display='none';
-			    
+
 		});
-		
+
 		function onLogin() {
 			var data = $('#loginForm').serializeArray();
 			var username = data[0].value;
@@ -28,36 +28,36 @@
 					$('#user').parent('div').removeClass('has-error');
 					$('#password2').parent('div').removeClass('has-error');
 					window.location="http://localhost:8088/";
-					
+
 					//GET METHOD zur Hauptseite
-					
+
 				},
-				
+
 				error: function(data){
 					console.log(data);
 					$('#user').parent('div').addClass('has-error');
 					$('#password2').parent('div').addClass('has-error');
 				},
 			});
-			
-			
+
+
 		}
-		
+
 		function onSwitchReg(){
-			
-				
+
+
 					window.location="http://localhost:8088/register";
-			
+
 		}
-		
-			
+
+
 </script>
 </head>
 <body >
 	<header>
 		<% include ../partials/header %>
 	</header>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-2"></div>
@@ -78,7 +78,7 @@
 							</div>
 							<!-- Login Cancel Button -->
 							<button type="button" class="btn btn-success btn-md center-block" onclick="onLogin();"><span class="glyphicon glyphicon-log-in"></span> Login</button>
-								
+
 						</form>
 					  </div>
 					 <div class="panel-footer">
@@ -93,6 +93,6 @@
 				</div>
 			<div class="col-sm-2"></div>
 		</div>
-	</div>    
+	</div>
 </body>
-</html>	
+</html>
