@@ -32,6 +32,7 @@
 		}
 
 		var count = 0;
+		
 
 		function onGadgetEntry(){
 
@@ -73,11 +74,10 @@
 		function createGadgetEntry(name, ip, port){
 
 
-			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" ><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
-			var test = "'"+name+"'";
-			var element = document.getElementById(test);
+			
+			
 
-			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
+			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" onclick="deleteGadget(event)"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
 
 
 			if(count % 2 == 0){
@@ -122,6 +122,29 @@
 				},
 				error: function(data){
 					console.log(data);
+				}
+			});
+		}
+		
+		function deleteGadget(){
+			
+			console.log(event.path[3].id);
+			var name = event.path[3].id;
+			if(name == "col1" || name == "col2"){
+				name = event.path[2].id;
+			}
+			console.log(name);
+			$.ajax({
+				url: "http://localhost:8088/api/v1/devices",
+				method: "DELETE",
+				data: {
+					name
+				},
+				success: function(data){
+					window.location="http://localhost:8088/";
+				},
+				error: function(data){
+					alert(data);
 				}
 			});
 		}
