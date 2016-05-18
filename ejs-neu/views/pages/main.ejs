@@ -49,8 +49,6 @@
 					port
 				},
 				success: function(data){
-					console.log(data);
-
 					$("#createModal").modal("hide");
 					
 					clearInput();
@@ -73,14 +71,14 @@
 
 		}
 		function createGadgetEntry(name, ip, port){
-<<<<<<< HEAD
+
 
 			var panel = '<div class="panel panel-primary" id='+name+'><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right" ><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
 			var test = "'"+name+"'";
 			var element = document.getElementById(test);
-=======
+
 			var panel = '<div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title">'+name +'</h2><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-remove"></span></button></div><div class="panel-body"><b><p>IP-Adresse: </b>'+ip+'</p><P><b>Port: </b>'+port+'</p></div><div class="panel-footer clearfix"><button class="btn btn-xs btn-primary pull-left"><span class="glyphicon glyphicon-console"></span>HTTP Request</button></div></div>';
->>>>>>> 4eb32f7208b2a55586d5e38064f8402cf3d11374
+
 
 			if(count % 2 == 0){
 				$("#col1").prepend(panel);
@@ -111,12 +109,7 @@
 			clearInput();
 		}
 
-<<<<<<< HEAD
-=======
-		$(document).click(function(event){
-			console.log(event.target.id);
-		});
->>>>>>> 4eb32f7208b2a55586d5e38064f8402cf3d11374
+
 
 		function onLogout(){
 			$.ajax({
@@ -132,18 +125,12 @@
 				}
 			});
 		}
-<<<<<<< HEAD
+
 		
 
 
 </script>
-=======
 
-
-
-
-	</script>
->>>>>>> 4eb32f7208b2a55586d5e38064f8402cf3d11374
 </head>
 <body >
 
@@ -153,13 +140,12 @@
 		<div class="container">
 		<div class="row">
 			<div class="col-sm-2"></div>
-<<<<<<< HEAD
+
 			<div class="col-sm-8" id="colGadget">
 				
-=======
-			<div class="col-sm-8">
-				<main>
->>>>>>> 4eb32f7208b2a55586d5e38064f8402cf3d11374
+
+
+
 				<div class="col-sm-6" id="col1">
 
 				</div>
