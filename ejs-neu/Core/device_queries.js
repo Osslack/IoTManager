@@ -5,8 +5,10 @@ function initDeviceCollection( ){
 	console.log("Created Unique Key");
 };
 
+
 function createDevice(device){
-    return this.db.collection("devices").insertOne(device)
+	let data = device.dbRepresentation;
+    return this.db.collection("devices").insertOne(data)
 		.then(cursor => {
             return new Device(cursor.ops[0])
         });

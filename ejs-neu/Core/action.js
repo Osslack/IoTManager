@@ -44,12 +44,20 @@ class Action {
 	}
 
 	//The "Owner" of the device
-	get deviceID(){
-		return ObjectId(this._obj.deviceID);
+	get deviceName(){
+		return this._obj.deviceName;
 	}
 
-	set deviceID(value){
-		this._obj.deviceID = value;
+	set deviceName(value){
+		this._obj.deviceName = value;
+	}
+
+	get owner(){
+		return this._obj.owner;
+	}
+
+	set owner(value){
+		this._obj.owner = value;
 	}
 
 	get dbRepresentation() {
