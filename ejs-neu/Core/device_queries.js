@@ -19,7 +19,8 @@ function getDevices(username){
 	let dbResult = deviceCursor.toArray();
 	let result = dbResult.then(array => {
 		return array
-		.map(dbDevice => new Device(dbDevice));
+		.map(dbDevice => new Device(dbDevice))
+		.map(device => device.userRepresentation);
 	})
 	return result;
 }
