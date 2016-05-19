@@ -174,23 +174,30 @@
 			var name = $("#createAction input#action").val();
 			var route = $("#createAction input#route").val();
 			var type = $("#createAction  input[type='radio']:checked").val();
-			$.ajax({
-				url: "http://localhost:8088/api/v1/actions/",
-				method: "POST",
-				data: {
-						name,
-						type,
-						route,
-						deviceName
-				},
-				success: function(data){
-					console.log(data);
-					window.location="http://localhost:8088/";
-				},
-				error: function(data){
-					console.log(data);
-				}
-			});
+			if(name && route && type){
+				$.ajax({
+					url: "http://localhost:8088/api/v1/actions/",
+					method: "POST",
+					data: {
+							name,
+							type,
+							route,
+							deviceName
+					},
+					success: function(data){
+						closeAction();
+						window.location="http://localhost:8088/";
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+			}
+			else{
+				$("#action").parent('div').addClass('has-error');
+				$("#route").parent('div').addClass('has-error');
+			}
+			
 		}
 
 		//close the modal to create an action an delte the input of the input fields
@@ -198,6 +205,8 @@
 			$("#createAction").modal("hide");
 			$("#createAction input#action").val('');
 			$("#createAction input#route").val('');
+			$("#action").parent('div').removeClass('has-error');
+			$("#route").parent('div').removeClass('has-error');
 		}
 
 		//execute an action

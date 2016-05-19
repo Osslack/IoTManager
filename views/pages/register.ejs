@@ -33,14 +33,11 @@
 							password
 						},
 						success: function(data){
-							console.log(data);
+						
 							window.location="http://localhost:8088/devices";
 						},
 						error: function(data){
-							console.log(data);
 							$('#username').parent('div').addClass('has-error');
-							
-							
 						}
 						
 					});
