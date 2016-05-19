@@ -174,7 +174,7 @@
 			var name = $("#createAction input#action").val();
 			var route = $("#createAction input#route").val();
 			var type = $("#createAction  input[type='radio']:checked").val();
-			if(name && route && type){
+			if(name && type){
 				$.ajax({
 					url: "http://localhost:8088/api/v1/actions/",
 					method: "POST",
@@ -195,7 +195,6 @@
 			}
 			else{
 				$("#action").parent('div').addClass('has-error');
-				$("#route").parent('div').addClass('has-error');
 			}
 			
 		}
@@ -206,12 +205,12 @@
 			$("#createAction input#action").val('');
 			$("#createAction input#route").val('');
 			$("#action").parent('div').removeClass('has-error');
-			$("#route").parent('div').removeClass('has-error');
 		}
 
 		//execute an action
 		function runAction(){
 			//get the device and the action name
+			console.log(event.path);
 			var actionName = event.path[0].id;
 			var deviceName = event.path[2].id;
 			$.ajax({
@@ -221,11 +220,13 @@
 					actionName,
 					deviceName
 				},
-				success: function(){
-					$("#runRequest").modal("show");
+				success: function(data){
+					console.log(data);
+					$("#requestrun").modal("show");
 				},
-				error: function(){
-					$("#requestFail").modal("show");
+				error: function(data){
+					console.log(data);
+					$("#requestfail").modal("show");
 				}
 			});
 		}
