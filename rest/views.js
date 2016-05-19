@@ -8,7 +8,7 @@ router.auth = (req, res, next) => {
         next();
     }
     else {
-        console.log('Authentication failed.');
+        console.log('Authentification failed.');
         res.redirect('/login');
     }
 };

@@ -22,7 +22,6 @@ function runAction(actionName, deviceName, owner) {
 		let action = new Action(actionDB);
 		let adress = device.adress;
 		let port = device.port;
-		console.log(adress, port)
 		return {action, adress, port};
 	})
 }

@@ -54,13 +54,11 @@ router.post("/login", (req, res) => {
     }
     req.app.core.authUser(username, password)
         .then(user => {
-          console.log(user);
             req.session.user = {
                 id      : user._id,
                 username: user.username
             };
             req.session.authenticated = true;
-            console.log(req.session)
             res.send('Succesfully authenticated user ' + username );
         })
         .catch(function(e){

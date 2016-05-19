@@ -15,7 +15,6 @@ class Action {
 		return this._obj._id;
 	}
 
-	//Name of the device
 	get name(){
 		return this._obj.name;
 	}
@@ -24,7 +23,6 @@ class Action {
 		this._obj.name = value;
 	}
 
-	//Ip adress, split into an array, because I couldn't get it to work otherwise
 	get type(){
 		return this._obj.type;
 	}
@@ -33,7 +31,6 @@ class Action {
 		this._obj.type = value;
 	}
 
-	//The Port the device is listening on
 	get route() {
 		return this._obj.route;
 	}
@@ -43,25 +40,23 @@ class Action {
 	}
 
 	run(adress, port){
-		let url = 'http://' + adress + ':' + port + this._obj.route;
-		let status = 500;
-		let type = this._obj.type;
-		console.log(type);
-		console.log(url);
-		request(
-		{ method: type, uri: url },
-		function (error, response, body) {
-		if(error){
-			return 404;
-		}else{
-			if(response.statusCode == 200){
-				return 200;
-			} else {
-				return response.statusCode;
-				}
-			}
-		})
-	}
+		var route = this._obj.route;
+		var type = this._obj.type;
+		return new Promise(
+			function(resolve, reject){
+				let url = 'http://' + adress + ':' + port + route;
+				//let type = this._obj.type;
+				request(
+				{ method: type, uri: url },
+				function (error, response, body) {
+					if(error === null){
+						resolve(response.statusCode);
+					}else{
+						reject(error);
+					}
+				})
+		});
+}
 
 	get dbRepresentation() {
 
