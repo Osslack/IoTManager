@@ -9,13 +9,19 @@ router.get('/', (req,res) => {
 })
 
 router.get('/date', (req,res) => {
-  console.log(Date.now())
-  res.send(Date.now());
+  let timestamp = Date.now();
+  console.log(timestamp)
+  res.send("Timestamp " + timestamp.toString());
 })
 
 router.post('/', (req,res) => {
   console.log('POST');
   res.send('POST');
+})
+
+router.use('*', (req,res) => {
+  console.log(req);
+  res.send("Catch All Route");
 })
 
 app.use('', router);

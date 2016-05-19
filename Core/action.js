@@ -45,40 +45,40 @@ class Action {
 	run(adress, port){
 		let url = 'http://' + adress + ':' + port + this._obj.route;
 		let status = 500;
+		let type = this._obj.type;
+		console.log(type);
 		console.log(url);
-		console.log(this._obj.type);
-		switch(this._obj.type) {
-    case 'get':
-		console.log("hier");
+		switch(type) {
+    case 'get' || 'GET':
       request.get(url)
-			.on('response', function(response) {
-				console.log(response)
+			.then((response) => {
+				console.log(response);
 			    return status = response.statusCode
 			  })
-			.on('error', function(err) {
+			.catch((e) => {
     			return status = 500;
   			})
         break;
-    case 'post':
+    case 'post' || 'POST':
 			request.post(url)
 			.on('response', function(response) {
-				console.log(response)
 			    return status = response.statusCode
 			  })
 			.on('error', function(err) {
     			return status = 500;
   			})
         break;
-    case 'delete':
+    case 'delete' || 'DELETE':
 			request.delete(url)
 			.on('response', function(response) {
-				console.log(response)
 			    return status = response.statusCode
 			  })
 			.on('error', function(err) {
     			return status = 500;
   			})
 				break;
+		default :
+				return status = 404;
 			}
 	}
 
