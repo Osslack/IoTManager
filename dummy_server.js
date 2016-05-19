@@ -10,7 +10,7 @@ router.get('/', (req,res) => {
 
 router.get('/date', (req,res) => {
   let timestamp = Date.now();
-  console.log(timestamp)
+  console.log(timestamp);
   res.send("Timestamp " + timestamp.toString());
 })
 

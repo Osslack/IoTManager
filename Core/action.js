@@ -48,42 +48,20 @@ class Action {
 		let type = this._obj.type;
 		console.log(type);
 		console.log(url);
-		switch(type) {
-    case 'get' || 'GET':
-      request.get(url)
-			.then((response) => {
-				console.log(response);
-			    return status = response.statusCode
-			  })
-			.catch((e) => {
-    			return status = 500;
-  			})
-        break;
-    case 'post' || 'POST':
-			request.post(url)
-			.on('response', function(response) {
-			    return status = response.statusCode
-			  })
-			.on('error', function(err) {
-    			return status = 500;
-  			})
-        break;
-    case 'delete' || 'DELETE':
-			request.delete(url)
-			.on('response', function(response) {
-			    return status = response.statusCode
-			  })
-			.on('error', function(err) {
-    			return status = 500;
-  			})
-				break;
-		default :
-				return status = 404;
+		request(
+		{ method: type, uri: url },
+		function (error, response, body) {
+		if(error){
+			return 404;
+		}else{
+			if(response.statusCode == 200){
+				return 200;
+			} else {
+				return response.statusCode;
+				}
 			}
+		})
 	}
-
-
-
 
 	get dbRepresentation() {
 

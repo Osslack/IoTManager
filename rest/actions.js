@@ -26,8 +26,9 @@ router.post('/run' ,(req,res)=> {
   let {actionName, deviceName} = req.body;
   let owner = req.session.user.username;
   req.app.core.runAction(actionName, deviceName, owner)
-  .then( (status) => {
-    res.send("Status " + status);
+  .then( (runData) => {
+    runData.action.run(runData.adress, runData.port);
+    res.send("Seemed to work");
   })
   .catch((e) => {
     res.status(500).send("Could not run action");
