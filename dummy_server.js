@@ -20,7 +20,7 @@ router.post('/', (req,res) => {
 })
 
 router.use('*', (req,res) => {
-  console.log(req);
+  console.log("You just got caught in the Catch All Route");	
   res.send("Catch All Route");
 })
 
