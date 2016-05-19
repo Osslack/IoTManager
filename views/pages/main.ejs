@@ -221,12 +221,10 @@
 					deviceName
 				},
 				success: function(data){
-					console.log(data);
-					$("#requestrun").modal("show");
+					$("#successModal").modal("show");
 				},
 				error: function(data){
-					console.log(data);
-					$("#requestfail").modal("show");
+					$("#failModal").modal("show");
 				}
 			});
 		}
@@ -252,11 +250,11 @@
 					<span class="glyphicon glyphicon-plus" ></span>
 				</button>
 				<!-- Include all partials which are used in this view -->
-				
+				<% include ../partials/success %>
+				<% include ../partials/failure %>
 				<% include ../partials/create %>
 				<% include ../partials/createAction %>
-				<% include ../partials/request %>
-				<% include ../partials/requestFail %>
+				
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
